@@ -7,6 +7,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Hello World!</h1>
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src="/packages/client/public/vite.svg" className="logo" alt="Vite logo" />

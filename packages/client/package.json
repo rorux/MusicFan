@@ -8,7 +8,9 @@
     "start:prod": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{ts,tsx,json}\" --fix && stylelint \"**/*.scss\" --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,json,scss}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,scss}\"",
+    "test": "vitest",
+    "test:cov": "vitest run --coverage"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -17,11 +19,16 @@
     "sass-loader": "^13.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@vitejs/plugin-react": "^3.1.0",
+    "@vitest/coverage-c8": "^0.29.2",
+    "@vitest/ui": "^0.29.2",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-stylelint": "^18.0.0",
@@ -29,10 +36,12 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdom": "^21.1.0",
     "prettier": "^2.3.2",
     "stylelint": "^15.2.0",
     "stylelint-config-standard-scss": "^7.0.1",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "vitest": "^0.29.2"
   }
 }
