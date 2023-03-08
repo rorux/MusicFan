@@ -12,7 +12,9 @@
     "start:dev:server": "lerna run start:dev --scope=server",
     "start:prod": "lerna run start:prod",
     "start:prod:client": "lerna run start:prod --scope=client",
-    "start:prod:server": "lerna run start:prod --scope=server"
+    "start:prod:server": "lerna run start:prod --scope=server",
+    "lint": "lerna run lint",
+    "format": "lerna run format"
   },
   "devDependencies": {
     "lerna": "^6.5.1"
