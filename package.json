@@ -5,6 +5,15 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "bootstrap": "yarn && lerna clean && yarn && lerna bootstrap",
+    "start:dev": "lerna run start:dev",
+    "start:dev:client": "lerna run start:dev --scope=client",
+    "start:dev:server": "lerna run start:dev --scope=server",
+    "start:prod": "lerna run start:prod",
+    "start:prod:client": "lerna run start:prod --scope=client",
+    "start:prod:server": "lerna run start:prod --scope=server"
+  },
   "devDependencies": {
     "lerna": "^6.5.1"
   }
