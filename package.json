@@ -1,5 +1,6 @@
 {
-  "name": "MusicFan",
+  "name": "musicfan",
+  "private": true,
   "version": "1.0.0",
   "workspaces": [
     "packages/*"
