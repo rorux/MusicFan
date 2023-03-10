@@ -5,14 +5,22 @@
 ## Как запустить приложение?
 
 - `yarn bootstrap` - установка пакетов на клиенте и на сервере;
-- `yarn start:dev` - запуск клиента и сервера в режиме разработки;
-- `yarn start:dev:client` - запуск клиента в режиме разработки;
-- `yarn start:dev:server` - запуск сервера в режиме разработки;
-- `yarn start:prod` - сборка клиента и сервера в режиме production, запуск сервера.
+- `yarn start` - запуск клиента и сервера в режиме разработки;
+- `yarn start:client` - запуск клиента в режиме разработки;
+- `yarn start:server` - запуск сервера в режиме разработки;
+- `yarn build` - production-сборка клиента и сервера;
+- `yarn build:client` - production-сборка клиента;
+- `yarn build:server` - production-сборка сервера.
+
+В режиме разработки:
+
+- **client**: localhost:5173;
+- **server**: localhost:3000;
 
 ## Линтеры и тесты
 
 - `yarn lint` - проверки **Eslint** на клиенте и на сервере (+ **Stylelint** на клиенте);
+- `yarn lint:fix` - проверки **Eslint** и **Stylelint** с правками кода;
 - `yarn format` - форматирование **Prettier** на клиенте и на сервере;
 - `yarn test:cov` - запуск тестов на клиенте и на сервере.
 

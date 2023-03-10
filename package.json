@@ -7,17 +7,19 @@
   ],
   "scripts": {
     "bootstrap": "yarn && lerna clean && yarn && lerna bootstrap",
-    "start:dev": "lerna run start:dev",
-    "start:dev:client": "lerna run start:dev --scope=client",
-    "start:dev:server": "lerna run start:dev --scope=server",
-    "start:prod": "lerna run start:prod",
-    "start:prod:client": "lerna run start:prod --scope=client",
-    "start:prod:server": "lerna run start:prod --scope=server",
+    "start": "lerna run start",
+    "start:client": "lerna run start --scope=client",
+    "start:server": "lerna run start --scope=server",
+    "build": "lerna run build",
+    "build:client": "lerna run build --scope=client",
+    "build:server": "lerna run build --scope=server",
     "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
     "format": "lerna run format",
     "test:cov": "lerna run test:cov"
   },
   "devDependencies": {
-    "lerna": "^6.5.1"
+    "lerna": "^6.5.1",
+    "husky": "^8.0.3"
   }
 }
