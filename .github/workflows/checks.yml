@@ -1,0 +1,24 @@
+name: Checks
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+jobs:
+  operations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install main deps
+        run: yarn
+      - name: Initialize
+        run: yarn lerna bootstrap
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test:cov
+      - name: Build
+        run: yarn build
