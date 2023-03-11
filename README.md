@@ -12,10 +12,9 @@
 - `yarn build:client` - production-сборка клиента;
 - `yarn build:server` - production-сборка сервера.
 
-В режиме разработки:
+**Frontend** работает на порту 5173.
 
-- **client**: localhost:5173;
-- **server**: localhost:3000;
+**Backend** работает на порту 3000.
 
 ## Линтеры и тесты
 

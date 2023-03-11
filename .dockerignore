@@ -1,0 +1,12 @@
+node_modules
+
+packages/client/dist
+packages/client/node_modules
+packages/client/coverage
+
+packages/server/dist
+packages/server/node_modules
+packages/server/coverage
+
+pgdata
+.env
