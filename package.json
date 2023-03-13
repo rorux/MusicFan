@@ -6,7 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "yarn && lerna clean && yarn && lerna bootstrap",
+    "init:env": "node init-environment.js",
+    "bootstrap": "yarn && yarn init:env && lerna clean && yarn && lerna bootstrap",
     "start": "lerna run start",
     "start:client": "lerna run start --scope=client",
     "start:server": "lerna run start --scope=server",

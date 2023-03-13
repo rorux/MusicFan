@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=development vite",
-    "build": "rm -rf ./dist && cross-env NODE_ENV=production tsc && vite build",
+    "start": "vite",
+    "build": "rm -rf ./dist && tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{ts,tsx,json}\" && stylelint \"**/*.scss\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx,json}\" --fix && stylelint \"**/*.scss\" --fix",
@@ -30,7 +30,6 @@
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.2",
     "@vitest/ui": "^0.29.2",
-    "cross-env": "^7.0.3",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-stylelint": "^18.0.0",
