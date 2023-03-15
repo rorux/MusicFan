@@ -16,7 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         host: config.get<string>('POSTGRES_HOST'),
         port: Number(config.get<number>('POSTGRES_PORT')),
         entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-        synchronize: true,
+        synchronize: false,
         autoLoadEntities: true,
         logging: true,
       }),
