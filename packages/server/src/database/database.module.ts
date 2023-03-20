@@ -1,7 +1,8 @@
-import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { User } from '../users/user.entity';
+import { CreateTableUsers1679342186052 } from '../../db/migrations/1679342186052-CreateTableUsers';
 
 @Module({
   imports: [
@@ -15,9 +16,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         database: config.get<string>('POSTGRES_DATABASE'),
         host: config.get<string>('POSTGRES_HOST'),
         port: Number(config.get<number>('POSTGRES_PORT')),
-        entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+        entities: [User],
+        migrations: [CreateTableUsers1679342186052],
+        migrationsRun: true,
+        migrationsTableName: 'migrations',
         synchronize: false,
-        autoLoadEntities: true,
         logging: true,
       }),
     }),

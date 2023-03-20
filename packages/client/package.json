@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "rm -rf ./dist && tsc && vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{ts,tsx,json}\" && stylelint \"**/*.scss\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx,json}\" --fix && stylelint \"**/*.scss\" --fix",
