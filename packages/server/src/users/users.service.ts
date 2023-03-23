@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
@@ -25,6 +25,16 @@ export class UsersService {
       return user;
     }
 
-    throw new HttpException('Пользователь не найден!', HttpStatus.NOT_FOUND);
+    return null;
+  }
+
+  async getUserByLogin(login: string): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ login });
+
+    if (user) {
+      return user;
+    }
+
+    return null;
   }
 }

@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Token } from './token.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { PublicUserDto } from '../users/dto/public-user.dto';
+import { TokensDto } from './dto/tokens.dto';
 
 @Injectable()
 export class TokensService {
@@ -11,7 +13,7 @@ export class TokensService {
     private readonly jwtService: JwtService,
   ) {}
 
-  generateTokens(payload: string) {
+  generateTokens(payload: PublicUserDto): TokensDto {
     const accessToken = this.jwtService.sign(payload, { secret: process.env.JWT_ACCESS_SECRET, expiresIn: '15s' });
     const refreshToken = this.jwtService.sign(payload, { secret: process.env.JWT_REFRESH_SECRET, expiresIn: '30s' });
     return {
@@ -20,18 +22,18 @@ export class TokensService {
     };
   }
 
-  validateAccessToken(token: string) {
+  validateAccessToken(token: string): PublicUserDto {
     try {
-      const userData = this.jwtService.verify(token, { secret: process.env.JWT_ACCESS_SECRET });
-      return userData;
+      const userData = this.jwtService.verify<PublicUserDto>(token, { secret: process.env.JWT_ACCESS_SECRET });
+      return userData as PublicUserDto;
     } catch (e) {
       return null;
     }
   }
 
-  validateRefreshToken(token: string) {
+  validateRefreshToken(token: string): PublicUserDto {
     try {
-      const userData = this.jwtService.verify(token, { secret: process.env.JWT_REFRESH_SECRET });
+      const userData = this.jwtService.verify<PublicUserDto>(token, { secret: process.env.JWT_REFRESH_SECRET });
       return userData;
     } catch (e) {
       return null;
