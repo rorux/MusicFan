@@ -7,6 +7,7 @@ import { PublicUserDto } from '../users/dto/public-user.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { FindUserDto } from '../users/dto/find-user.dto';
 import { PublicUserAndTokensDto } from './dto/public-user-and-tokens.dto';
+import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
 
   async getUserDtoAndTokens(user: User): Promise<PublicUserAndTokensDto> {
     const publicUser = new PublicUserDto(user);
-    const tokens = this.tokensService.generateTokens({ ...publicUser });
+    const tokens = await this.tokensService.generateTokens({ ...publicUser });
     await this.tokensService.saveToken(user.id, tokens.refreshToken);
 
     return { user: publicUser, ...tokens };
@@ -23,7 +24,7 @@ export class AuthService {
   async signUp(userDto: CreateUserDto): Promise<PublicUserAndTokensDto> {
     const candidate = await this.usersService.getUserByLogin(userDto.login);
     if (candidate) {
-      throw new BadRequestException({ message: `Пользователь с логином ${userDto.login} уже существует!` });
+      throw new BadRequestException(`Пользователь с логином ${userDto.login} уже существует!`);
     }
     const hashPassword = await bcrypt.hash(userDto.password, 3);
     const user = await this.usersService.createUser({
@@ -38,20 +39,19 @@ export class AuthService {
   async signIn(userDto: FindUserDto): Promise<PublicUserAndTokensDto> {
     const user = await this.usersService.getUserByLogin(userDto.login);
     if (!user) {
-      throw new BadRequestException({ message: `Неверный логин и/или пароль!` });
+      throw new BadRequestException('Неверный логин и/или пароль!');
     }
 
     const isPasswordCorrect = await bcrypt.compare(userDto.password, user.password);
     if (!isPasswordCorrect) {
-      throw new BadRequestException({ message: `Неверный логин и/или пароль!` });
+      throw new BadRequestException('Неверный логин и/или пароль!');
     }
 
     return await this.getUserDtoAndTokens(user);
   }
 
-  async logout(refreshToken: string) {
-    const token = await this.tokensService.removeToken(refreshToken);
-    return token;
+  async logout(refreshToken: string): Promise<DeleteResult> {
+    return await this.tokensService.removeToken(refreshToken);
   }
 
   async refresh(refreshToken: string): Promise<PublicUserAndTokensDto> {
@@ -59,7 +59,7 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    const userDtoFromRefreshToken = this.tokensService.validateRefreshToken(refreshToken);
+    const userDtoFromRefreshToken = await this.tokensService.validateRefreshToken(refreshToken);
     const tokenFromDatabase = await this.tokensService.findToken(refreshToken);
     if (!userDtoFromRefreshToken || !tokenFromDatabase) {
       throw new UnauthorizedException();

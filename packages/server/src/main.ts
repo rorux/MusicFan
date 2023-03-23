@@ -7,6 +7,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
+  app.enableCors({ origin: `${process.env.UI_HOST}${process.env.UI_PORT}`, credentials: true });
   const config = await app.get(ConfigService);
   const port = config.get<number>('API_PORT');
 

@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Token } from './token.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { PublicUserDto } from '../users/dto/public-user.dto';
 import { TokensDto } from './dto/tokens.dto';
+import { accessTokenMaxAge, refreshTokenMaxAge } from '../const';
 
 @Injectable()
 export class TokensService {
@@ -13,27 +14,37 @@ export class TokensService {
     private readonly jwtService: JwtService,
   ) {}
 
-  generateTokens(payload: PublicUserDto): TokensDto {
-    const accessToken = this.jwtService.sign(payload, { secret: process.env.JWT_ACCESS_SECRET, expiresIn: '15s' });
-    const refreshToken = this.jwtService.sign(payload, { secret: process.env.JWT_REFRESH_SECRET, expiresIn: '30s' });
+  async generateTokens(payload: PublicUserDto): Promise<TokensDto> {
+    const accessToken = await this.jwtService.signAsync(payload, {
+      secret: process.env.JWT_ACCESS_SECRET,
+      expiresIn: `${accessTokenMaxAge / 1000}s`,
+    });
+    const refreshToken = await this.jwtService.signAsync(payload, {
+      secret: process.env.JWT_REFRESH_SECRET,
+      expiresIn: `${refreshTokenMaxAge / 1000}s`,
+    });
     return {
       accessToken,
       refreshToken,
     };
   }
 
-  validateAccessToken(token: string): PublicUserDto {
+  async validateAccessToken(token: string): Promise<PublicUserDto> {
     try {
-      const userData = this.jwtService.verify<PublicUserDto>(token, { secret: process.env.JWT_ACCESS_SECRET });
-      return userData as PublicUserDto;
+      const userData = await this.jwtService.verifyAsync<PublicUserDto>(token, {
+        secret: process.env.JWT_ACCESS_SECRET,
+      });
+      return userData;
     } catch (e) {
       return null;
     }
   }
 
-  validateRefreshToken(token: string): PublicUserDto {
+  async validateRefreshToken(token: string): Promise<PublicUserDto> {
     try {
-      const userData = this.jwtService.verify<PublicUserDto>(token, { secret: process.env.JWT_REFRESH_SECRET });
+      const userData = await this.jwtService.verifyAsync<PublicUserDto>(token, {
+        secret: process.env.JWT_REFRESH_SECRET,
+      });
       return userData;
     } catch (e) {
       return null;
@@ -54,13 +65,11 @@ export class TokensService {
     return newToken;
   }
 
-  async removeToken(refreshToken: string) {
-    const token = await this.tokensRepository.delete({ refreshToken });
-    return token;
+  async removeToken(refreshToken: string): Promise<DeleteResult> {
+    return await this.tokensRepository.delete({ refreshToken });
   }
 
   async findToken(refreshToken: string): Promise<Token> {
-    const token = await this.tokensRepository.findOneBy({ refreshToken });
-    return token;
+    return await this.tokensRepository.findOneBy({ refreshToken });
   }
 }
