@@ -1,5 +1,6 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { User } from '../src/users/user.entity';
+import { Token } from '../src/tokens/token.entity';
 require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` }); // eslint-disable-line
 
 export const dataSourceOptions: DataSourceOptions = {
@@ -9,7 +10,7 @@ export const dataSourceOptions: DataSourceOptions = {
   database: process.env.POSTGRES_DATABASE,
   host: process.env.POSTGRES_HOST,
   port: Number(process.env.POSTGRES_PORT),
-  entities: [User],
+  entities: [User, Token],
   migrations: [],
   synchronize: false,
   logging: true,
