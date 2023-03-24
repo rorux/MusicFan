@@ -7,10 +7,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello World!</h1>
+      <h1 className="mb-5">Hello World!</h1>
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/packages/client/public/vite.svg" className="logo" alt="Vite logo" />
+          <img src="public/vite.svg" className="logo" alt="Vite logo" />
         </a>
         <a href="https://reactjs.org" target="_blank" rel="noreferrer">
           <img src={reactLogo} className="logo react" alt="React logo" />
