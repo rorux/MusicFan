@@ -1,0 +1,36 @@
+$el-delimiter: '__';
+$mod-delimiter: '--';
+$mod-val-delimiter: '±';
+
+/// Block mixin
+/// @access public
+/// @param {String} $block-name - Block's name
+@mixin block($block-name) {
+  .#{$block-name} {
+    @content;
+  }
+}
+
+/// Element mixin
+/// @access public
+/// @param {String} $el-name - Element's name
+@mixin el($el-name) {
+  @at-root &#{$el-delimiter}#{$el-name} {
+    @content;
+  }
+}
+
+/// Modifier mixin
+/// @access public
+/// @param {String} $modifier - Modifier's name
+@mixin mod($modifier, $value: '') {
+  @if $value == '' {
+    &#{$mod-delimiter}#{$modifier} {
+      @content;
+    }
+  } @else {
+    &#{$mod-delimiter}#{$modifier}#{$mod-val-delimiter}#{$value} {
+      @content;
+    }
+  }
+}
