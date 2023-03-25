@@ -1,0 +1,30 @@
+:root {
+  --family: 'Nunito Sans', sans-serif;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fw-light: 300;
+  --fw-normal: 600;
+  --fw-bold: 800;
+}
+
+body[data-theme='dark'] {
+  --colors-text: #fff;
+  --colors-bg: #111;
+  --colors-block-bg: #212121;
+  --shadow: #3c3c3c 0 0 8px
+}
+
+body[data-theme='light'] {
+  --colors-text: #212121;
+  --colors-bg: #f3f4f6;
+  --colors-block-bg: #fff;
+  --shadow: #ddd 0px 8px 24px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--family);
+  color: var(--colors-text);
+  font-weight: var(--fw-light);
+  background-color: var(--colors-bg);
+}
