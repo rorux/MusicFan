@@ -1,6 +1,8 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { IconContext } from 'react-icons';
 import { Router } from './router/Router';
+import { iconsStyles } from '@context';
 
 const ThemeChangingBtn = (): ReactElement => {
   const [toggleTheme, setToggleTheme] = useState<'dark' | 'light'>('dark');
@@ -19,8 +21,10 @@ const ThemeChangingBtn = (): ReactElement => {
 function App() {
   return (
     <BrowserRouter>
-      <ThemeChangingBtn />
-      <Router />
+      <IconContext.Provider value={iconsStyles}>
+        <ThemeChangingBtn />
+        <Router />
+      </IconContext.Provider>
     </BrowserRouter>
   );
 }

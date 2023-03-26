@@ -1,0 +1,11 @@
+@include block('signup') {
+  @include el('form') {
+    background-color: var(--colors-block-bg);
+    box-shadow: var(--shadow);
+    max-width: 24rem;
+  }
+
+  @include el('header') {
+    letter-spacing: .05rem;
+  }
+}

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from './routes';
-import { MainPage, NotFoundPage, SigninPage, SignupPage } from '../pages';
+import { MainPage, NotFoundPage, SigninPage, SignupPage } from '@pages';
 
 export const Router = () => {
   return (
