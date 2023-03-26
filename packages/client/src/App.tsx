@@ -1,8 +1,8 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { IconContext } from 'react-icons';
-import { Router } from './router/Router';
 import { iconsStyles } from '@context';
+import { Router } from '@router';
 
 const ThemeChangingBtn = (): ReactElement => {
   const [toggleTheme, setToggleTheme] = useState<'dark' | 'light'>('dark');

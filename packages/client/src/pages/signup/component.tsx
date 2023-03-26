@@ -1,16 +1,16 @@
 import { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 import { BsShieldFillExclamation, BsPersonBoundingBox, BsPersonSquare } from 'react-icons/bs';
+import { ROUTES } from '@router';
 import { cn, kebab } from '@bem';
 import { Input } from '@components';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '../../router/routes';
 
 const block = cn('signup');
 
 export const SignupPage = (): ReactElement => {
   return (
-    <div className="container">
-      <div className={kebab(block('form', ['card mt-5 mx-auto rounded-0']))}>
+    <div className="container h-100 d-flex">
+      <div className={kebab(block('form', ['card m-auto rounded-0']))}>
         <div className={kebab(block('header', ['card-header h4 text-center text-uppercase']))}>
           <small>Регистрация</small>
         </div>

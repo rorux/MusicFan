@@ -35,6 +35,9 @@
       ],
       "@context": [
         "src/context"
+      ],
+      "@router": [
+        "src/router"
       ]
     }
   },

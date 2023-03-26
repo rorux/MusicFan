@@ -54,6 +54,10 @@ body[data-theme='light'] {
   --shadow: #ddd 0px 8px 24px;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: var(--family);
