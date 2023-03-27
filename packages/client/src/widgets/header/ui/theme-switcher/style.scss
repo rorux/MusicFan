@@ -1,9 +1,9 @@
 @include block('theme-switcher') {
   position: relative;
-  width: 48px;
-  height: 24px;
+  width: 52px;
+  height: 26px;
   background: var(--colors-block-bg);
-  border-radius: 24px;
+  border-radius: 26px;
   border: 1px solid var(--colors-text-additional);
 
   @include el('input') {
@@ -88,8 +88,8 @@
 
     .theme-btn-slider {
       margin: 3px;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #c5c5c5;
       transform: translateX(0);

@@ -11,7 +11,7 @@ export const ThemeSwitcher = () => {
   }, [checked]);
 
   return (
-    <div className={kebab(block(undefined, ['m-2']))}>
+    <div className={kebab(block())}>
       <label className={kebab(block('label'))} htmlFor="theme-btn">
         <input
           className={kebab(block('input'))}
