@@ -1,24 +1,28 @@
 import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { BsShieldFillExclamation, BsPersonBoundingBox, BsPersonSquare } from 'react-icons/bs';
 import { Formik } from 'formik';
-import { ROUTES } from '@router';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets';
 import { Input } from '@components';
+import { ROUTES } from '@router';
 import { initialSignupFormState, signupValidationSchema } from './validation-schema';
 import { CreateUser } from './types';
 
 const block = cn('signup');
+const namespace = 'signup-page';
 
 export const SignupPage = (): ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Header />
       <div className="container h-100 d-flex">
         <div className={kebab(block('form', ['card m-auto rounded-0']))}>
           <div className={kebab(block('header', ['card-header h4 text-center text-uppercase']))}>
-            <small>Регистрация</small>
+            <small>{t(`${namespace}.title`)}</small>
           </div>
           <div className="card-body px-5 py-5">
             <Formik
@@ -36,7 +40,7 @@ export const SignupPage = (): ReactElement => {
                       onChange={handleChange}
                       isInvalid={!!errors.name}
                       invalidFeedback={errors.name}
-                      placeholder="Имя"
+                      placeholder={t(`${namespace}.name-label`)}
                       icon={<BsPersonBoundingBox />}
                     />
                   </div>
@@ -48,7 +52,7 @@ export const SignupPage = (): ReactElement => {
                       onChange={handleChange}
                       isInvalid={!!errors.login}
                       invalidFeedback={errors.login}
-                      placeholder="Логин"
+                      placeholder={t(`${namespace}.login-label`)}
                       icon={<BsPersonSquare />}
                     />
                   </div>
@@ -60,13 +64,13 @@ export const SignupPage = (): ReactElement => {
                       onChange={handleChange}
                       isInvalid={!!errors.password}
                       invalidFeedback={errors.password}
-                      placeholder="Пароль"
+                      placeholder={t(`${namespace}.password-label`)}
                       icon={<BsShieldFillExclamation />}
                     />
                   </div>
                   <div className=" text-center">
                     <button type="submit" className="btn btn-outline-green w-100 rounded-0 text-uppercase">
-                      <small>Отправить</small>
+                      <small>{t(`${namespace}.submit-form`)}</small>
                     </button>
                   </div>
                 </form>
@@ -75,7 +79,8 @@ export const SignupPage = (): ReactElement => {
           </div>
           <div className={kebab(block('footer', ['card-footer text-center']))}>
             <small>
-              <Link to={ROUTES.SIGNIN}>Войти</Link>, если уже зарегистрированы
+              <Link to={ROUTES.SIGNIN}>{t(`${namespace}.enter`)}</Link>
+              {t(`${namespace}.already-registered`)}
             </small>
           </div>
         </div>

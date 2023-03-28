@@ -1,0 +1,9 @@
+{
+  "title": "Регистрация",
+  "name-label": "Имя",
+  "login-label": "Логин",
+  "password-label": "Пароль",
+  "submit-form": "Отправить",
+  "enter": "Войти",
+  "already-registered": ", если уже зарегистрированы"
+}

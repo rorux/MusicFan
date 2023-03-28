@@ -1,0 +1,9 @@
+{
+  "title": "Registration",
+  "name-label": "Name",
+  "login-label": "Login",
+  "password-label": "Password",
+  "submit-form": "Send",
+  "enter": "Enter",
+  "already-registered": ", if already registered"
+}

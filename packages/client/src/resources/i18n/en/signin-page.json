@@ -1,0 +1,8 @@
+{
+  "title": "Authorization",
+  "login-label": "Login",
+  "password-label": "Password",
+  "submit-form": "Send",
+  "register": "Register",
+  "no-account-yet": ", if you don't have an account yet"
+}

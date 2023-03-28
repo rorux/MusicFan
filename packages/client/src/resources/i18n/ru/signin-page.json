@@ -1,0 +1,8 @@
+{
+  "title": "Авторизация",
+  "login-label": "Логин",
+  "password-label": "Пароль",
+  "submit-form": "Отправить",
+  "register": "Зарегистрироваться",
+  "no-account-yet": ", если еще нет аккаунта"
+}
