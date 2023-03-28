@@ -8,20 +8,22 @@ export const initialSignupFormState: CreateUser = {
   password: '',
 };
 
+const namespace = 'signup-page.validation';
+
 export const signupValidationSchema = Yup.object().shape({
   name: Yup.string()
-    .required('Введите, пожалуйста, имя!')
-    .min(2, 'Слишком короткое имя!')
-    .max(20, 'Слишком длинное имя!')
-    .matches(validationRegexps.username, 'Латиница или кириллица, может содержать "-"'),
+    .required(`${namespace}.name.empty`)
+    .min(2, `${namespace}.name.min-length`)
+    .max(20, `${namespace}.name.max-length`)
+    .matches(validationRegexps.name, `${namespace}.name.matches`),
   login: Yup.string()
-    .required('Введите, пожалуйста, логин!')
-    .min(2, 'Слишком короткий логин!')
-    .max(20, 'Слишком длинный логин!')
-    .matches(validationRegexps.login, 'Латиница и цифры, может содержать "-" и "_"'),
+    .required(`${namespace}.login.empty`)
+    .min(2, `${namespace}.login.min-length`)
+    .max(20, `${namespace}.login.max-length`)
+    .matches(validationRegexps.login, `${namespace}.login.matches`),
   password: Yup.string()
-    .required('Введите, пожалуйста, пароль!')
-    .min(3, 'Пароль от 3 символов!')
-    .max(20, 'Пароль не более 20 символов!')
-    .matches(validationRegexps.password, 'Латиница, кириллица, цифры, спецсимволы: "!?&/|^#_-"'),
+    .required(`${namespace}.password.empty`)
+    .min(3, `${namespace}.password.min-length`)
+    .max(20, `${namespace}.password.max-length`)
+    .matches(validationRegexps.password, `${namespace}.password.matches`),
 });

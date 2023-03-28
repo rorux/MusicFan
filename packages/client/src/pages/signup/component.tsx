@@ -39,7 +39,7 @@ export const SignupPage = (): ReactElement => {
                       value={values.name}
                       onChange={handleChange}
                       isInvalid={!!errors.name}
-                      invalidFeedback={errors.name}
+                      invalidFeedback={t(errors.name as string)}
                       placeholder={t(`${namespace}.name-label`)}
                       icon={<BsPersonBoundingBox />}
                     />
@@ -51,7 +51,7 @@ export const SignupPage = (): ReactElement => {
                       value={values.login}
                       onChange={handleChange}
                       isInvalid={!!errors.login}
-                      invalidFeedback={errors.login}
+                      invalidFeedback={t(errors.login as string)}
                       placeholder={t(`${namespace}.login-label`)}
                       icon={<BsPersonSquare />}
                     />
@@ -63,7 +63,7 @@ export const SignupPage = (): ReactElement => {
                       value={values.password}
                       onChange={handleChange}
                       isInvalid={!!errors.password}
-                      invalidFeedback={errors.password}
+                      invalidFeedback={t(errors.password as string)}
                       placeholder={t(`${namespace}.password-label`)}
                       icon={<BsShieldFillExclamation />}
                     />

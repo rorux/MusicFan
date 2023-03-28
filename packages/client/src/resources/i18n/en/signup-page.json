@@ -5,5 +5,25 @@
   "password-label": "Password",
   "submit-form": "Send",
   "enter": "Enter",
-  "already-registered": ", if already registered"
+  "already-registered": ", if already registered",
+  "validation": {
+    "name": {
+      "empty": "Please enter a name!",
+      "min-length": "The name is too short!",
+      "max-length": "The name is too long!",
+      "matches": "Latin or Cyrillic, may contain \"-\""
+    },
+    "login": {
+      "empty": "Please enter a login!",
+      "min-length": "The login is too short!",
+      "max-length": "The login is too long!",
+      "matches": "Latin letters and numbers, may contain  \"-\" and \"_\""
+    },
+    "password": {
+      "empty": "Please enter a password!",
+      "min-length": "Password of 3 characters!",
+      "max-length": "The password is no more than 20 characters!",
+      "matches": "Latin, Cyrillic, numbers, special characters: \"!?&/|^#_-\""
+    }
+  }
 }

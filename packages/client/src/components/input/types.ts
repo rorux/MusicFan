@@ -9,7 +9,7 @@ export type InputProps = {
       : (e: string | React.ChangeEvent<any>) => void;
   };
   isInvalid?: boolean;
-  invalidFeedback?: string;
+  invalidFeedback?: string | null;
   placeholder: string;
   icon: JSX.Element;
 };

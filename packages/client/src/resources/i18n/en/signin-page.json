@@ -4,5 +4,19 @@
   "password-label": "Password",
   "submit-form": "Send",
   "register": "Register",
-  "no-account-yet": ", if you haven't an account yet"
+  "no-account-yet": ", if you haven't an account yet",
+  "validation": {
+    "login": {
+      "empty": "Please enter your login!",
+      "min-length": "The login is too short!",
+      "max-length": "The login is too long!",
+      "matches": "Latin letters and numbers, may contain  \"-\" and \"_\""
+    },
+    "password": {
+      "empty": "Please enter your password!",
+      "min-length": "Password of 3 characters!",
+      "max-length": "The password is no more than 20 characters!",
+      "matches": "Latin, Cyrillic, numbers, special characters: \"!?&/|^#_-\""
+    }
+  }
 }

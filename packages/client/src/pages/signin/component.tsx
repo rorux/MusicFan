@@ -39,7 +39,7 @@ export const SigninPage = (): ReactElement => {
                       value={values.login}
                       onChange={handleChange}
                       isInvalid={!!errors.login}
-                      invalidFeedback={errors.login}
+                      invalidFeedback={t(errors.login as string)}
                       placeholder={t(`${namespace}.login-label`)}
                       icon={<BsPersonSquare />}
                     />
@@ -51,7 +51,7 @@ export const SigninPage = (): ReactElement => {
                       value={values.password}
                       onChange={handleChange}
                       isInvalid={!!errors.password}
-                      invalidFeedback={errors.password}
+                      invalidFeedback={t(errors.password as string)}
                       placeholder={t(`${namespace}.password-label`)}
                       icon={<BsShieldFillExclamation />}
                     />
