@@ -2,12 +2,13 @@ import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { BsShieldFillExclamation, BsPersonSquare } from 'react-icons/bs';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets';
 import { Input } from '@components';
 import { ROUTES } from '@router';
-import { FindUser } from '@features';
+import { FindUser, authorize } from '@features';
+import { useAppDispatch } from '@store';
 import { initialSigninFormState, signinValidationSchema } from './validation-schema';
 
 const block = cn('signup');
@@ -15,6 +16,13 @@ const namespace = 'signin-page';
 
 export const SigninPage = (): ReactElement => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (values: FindUser, actions: FormikHelpers<any>) => {
+    await dispatch(authorize(values));
+    actions.setFieldValue('login', '', false);
+    actions.setFieldValue('password', '', false);
+  };
 
   return (
     <>
@@ -28,7 +36,7 @@ export const SigninPage = (): ReactElement => {
             <Formik
               initialValues={{ ...initialSigninFormState }}
               validationSchema={signinValidationSchema}
-              onSubmit={(formData: FindUser) => console.log(formData)}
+              onSubmit={handleSubmit}
             >
               {({ handleSubmit, handleChange, values, errors }) => (
                 <form noValidate onSubmit={handleSubmit}>

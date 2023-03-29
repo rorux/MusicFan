@@ -25,7 +25,7 @@ $axios.interceptors.response.use(
         localStorage.setItem('token', response.data.accessToken);
         return $axios.request(originalRequest);
       } catch (e) {
-        console.log('НЕ АВТОРИЗОВАН');
+        console.log('Not authorized...');
       }
     }
     throw error;
