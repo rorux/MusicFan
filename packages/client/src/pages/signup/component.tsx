@@ -2,19 +2,28 @@ import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { BsShieldFillExclamation, BsPersonBoundingBox, BsPersonSquare } from 'react-icons/bs';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets';
 import { Input } from '@components';
 import { ROUTES } from '@router';
+import { CreateUser, register } from '@features';
+import { useAppDispatch } from '@store';
 import { initialSignupFormState, signupValidationSchema } from './validation-schema';
-import { CreateUser } from './types';
 
 const block = cn('signup');
 const namespace = 'signup-page';
 
 export const SignupPage = (): ReactElement => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (values: CreateUser, actions: FormikHelpers<any>) => {
+    await dispatch(register(values));
+    actions.setFieldValue('name', '', false);
+    actions.setFieldValue('login', '', false);
+    actions.setFieldValue('password', '', false);
+  };
 
   return (
     <>
@@ -28,7 +37,7 @@ export const SignupPage = (): ReactElement => {
             <Formik
               initialValues={{ ...initialSignupFormState }}
               validationSchema={signupValidationSchema}
-              onSubmit={(formData: CreateUser) => console.log(formData)}
+              onSubmit={handleSubmit}
             >
               {({ handleSubmit, handleChange, values, errors }) => (
                 <form noValidate onSubmit={handleSubmit}>

@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { validationRegexps } from '@utils';
-import { CreateUser } from './types';
+import { CreateUser } from '@features';
 
 export const initialSignupFormState: CreateUser = {
   name: '',

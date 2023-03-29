@@ -7,8 +7,8 @@ import { cn, kebab } from '@bem';
 import { Header } from '@widgets';
 import { Input } from '@components';
 import { ROUTES } from '@router';
+import { FindUser } from '@features';
 import { initialSigninFormState, signinValidationSchema } from './validation-schema';
-import { FindUser } from './types';
 
 const block = cn('signup');
 const namespace = 'signin-page';
