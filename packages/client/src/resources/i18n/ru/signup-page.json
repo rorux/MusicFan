@@ -6,6 +6,7 @@
   "submit-form": "Отправить",
   "enter": "Войти",
   "already-registered": ", если уже зарегистрированы",
+  "registration-completed": "Регистрация успешно завершена!",
   "validation": {
     "name": {
       "empty": "Введите, пожалуйста, имя!",

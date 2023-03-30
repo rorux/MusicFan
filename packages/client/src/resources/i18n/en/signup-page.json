@@ -6,6 +6,7 @@
   "submit-form": "Send",
   "enter": "Enter",
   "already-registered": ", if already registered",
+  "registration-completed": "Registration is successfully completed!",
   "validation": {
     "name": {
       "empty": "Please enter a name!",

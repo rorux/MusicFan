@@ -1,31 +1,34 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { api } from '@api';
+import axios from 'axios';
 import $axios from '@http';
+import { api } from '@api';
 import { User, UserAndTokens, AuthState, CreateUser, FindUser } from './types';
 
 export const register = createAsyncThunk<User, CreateUser, { rejectValue: string }>(
   '@@auth/signup',
   async function (createUser, { rejectWithValue }) {
-    const response = await $axios.post<UserAndTokens>(api.auth.signup, createUser);
-
-    if (!response.data) {
-      return rejectWithValue('Server Error!');
+    try {
+      const response = await $axios.post<UserAndTokens>(api.auth.signup, createUser);
+      return response.data.user;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data.message);
+      } else return rejectWithValue('error.unknown');
     }
-
-    return response.data.user;
   },
 );
 
 export const authorize = createAsyncThunk<User, FindUser, { rejectValue: string }>(
   '@@auth/signin',
   async function (findUser, { rejectWithValue }) {
-    const response = await $axios.post<UserAndTokens>(api.auth.signin, findUser);
-
-    if (!response.data) {
-      return rejectWithValue('Server Error!');
+    try {
+      const response = await $axios.post<UserAndTokens>(api.auth.signin, findUser);
+      return response.data.user;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data.message);
+      } else return rejectWithValue('error.unknown');
     }
-
-    return response.data.user;
   },
 );
 
