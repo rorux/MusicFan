@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { BsShieldFillExclamation, BsPersonSquare } from 'react-icons/bs';
 import { Formik, FormikHelpers } from 'formik';
 import { cn, kebab } from '@bem';
@@ -8,7 +9,7 @@ import { Header } from '@widgets';
 import { Input } from '@components';
 import { ROUTES } from '@router';
 import { FindUser, authorize } from '@features';
-import { useAppDispatch } from '@store';
+import { useAppDispatch, useAppSelector } from '@store';
 import { initialSigninFormState, signinValidationSchema } from './validation-schema';
 
 const block = cn('signup');
@@ -17,6 +18,16 @@ const namespace = 'signin-page';
 export const SigninPage = (): ReactElement => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
+  const { user, error, loading } = useAppSelector((state) => state.auth);
+
+  if (error) {
+    toast.error(error === 'error.unknown' ? t(error) : error);
+  }
+
+  if (user) {
+    return <Navigate to={ROUTES.MAIN} />;
+  }
 
   const handleSubmit = async (values: FindUser, actions: FormikHelpers<any>) => {
     await dispatch(authorize(values));
@@ -65,7 +76,18 @@ export const SigninPage = (): ReactElement => {
                     />
                   </div>
                   <div className=" text-center">
-                    <button type="submit" className="btn btn-outline-green w-100 rounded-0 text-uppercase">
+                    <button
+                      type="submit"
+                      className="btn btn-outline-green w-100 rounded-0 text-uppercase d-flex justify-content-center align-items-center"
+                    >
+                      {loading && (
+                        <span
+                          className="spinner-grow me-1"
+                          style={{ width: '0.7rem', height: '0.7rem' }}
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                      )}
                       <small>{t(`${namespace}.submit-form`)}</small>
                     </button>
                   </div>
