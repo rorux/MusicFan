@@ -8,6 +8,7 @@ const $axios = axios.create({
 });
 
 $axios.interceptors.request.use((config) => {
+  config.headers.lang = localStorage.getItem('i18nextLng') ?? 'ru';
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 });

@@ -1,5 +1,7 @@
+import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { HeaderResolver, I18nJsonLoader, I18nModule } from 'nestjs-i18n';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
@@ -12,6 +14,15 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
+    I18nModule.forRoot({
+      fallbackLanguage: 'ru',
+      loader: I18nJsonLoader,
+      loaderOptions: {
+        path: path.join(__dirname, '../i18n/'),
+        watch: true,
+      },
+      resolvers: [new HeaderResolver(['lang'])],
     }),
     DatabaseModule,
     UsersModule,
