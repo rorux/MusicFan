@@ -24,14 +24,14 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@components": [
-        "src/components"
+      "@components/*": [
+        "src/components/*"
       ],
       "@bem": [
         "src/bem"
       ],
-      "@pages": [
-        "src/pages"
+      "@pages/*": [
+        "src/pages/*"
       ],
       "@context": [
         "src/context"
@@ -42,8 +42,8 @@
       "@utils": [
         "src/utils"
       ],
-      "@widgets": [
-        "src/widgets"
+      "@widgets/*": [
+        "src/widgets/*"
       ],
       "@api": [
         "src/api"
@@ -51,11 +51,14 @@
       "@store": [
         "src/store"
       ],
-      "@features": [
-        "src/features"
+      "@features/*": [
+        "src/features/*"
       ],
       "@http": [
         "src/http"
+      ],
+      "@resources": [
+        "src/resources"
       ]
     }
   },

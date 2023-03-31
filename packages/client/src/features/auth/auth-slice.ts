@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import i18n from '../../resources/i18n';
 import $axios from '@http';
+import { i18n } from '@resources';
 import { api } from '@api';
 import { User, UserAndTokens, AuthState, CreateUser, FindUser } from './types';
 
@@ -44,7 +44,9 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    cleanAuthState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state) => {
@@ -75,3 +77,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const { cleanAuthState } = authSlice.actions;

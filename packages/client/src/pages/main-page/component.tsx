@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { cn, kebab } from '../../bem';
+import { cn, kebab } from '@bem';
 
 const block = cn('main-page');
 

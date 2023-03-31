@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { validationRegexps } from '@utils';
-import { FindUser } from '@features';
+import { FindUser } from '@features/auth';
 
 export const initialSigninFormState: FindUser = {
   login: '',

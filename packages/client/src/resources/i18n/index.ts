@@ -5,8 +5,6 @@ import translationEn from './en/translation';
 import translationRu from './ru/translation';
 import { IsDevelopment } from '../../constants';
 
-export * from './lang-list';
-
 const initOptions: InitOptions = {
   lng: localStorage.getItem('i18nextLng') ?? 'ru',
   detection: {

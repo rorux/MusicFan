@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import { BsShieldFillExclamation, BsPersonSquare } from 'react-icons/bs';
 import { Formik, FormikHelpers } from 'formik';
 import { cn, kebab } from '@bem';
-import { Header } from '@widgets';
-import { Input } from '@components';
+import { Header } from '@widgets/header';
+import { Input } from '@components/input';
 import { ROUTES } from '@router';
-import { FindUser, authorize } from '@features';
+import { authorize, cleanAuthState, FindUser } from '@features/auth';
 import { useAppDispatch, useAppSelector } from '@store';
 import { initialSigninFormState, signinValidationSchema } from './validation-schema';
 
@@ -23,6 +23,7 @@ export const SigninPage = (): ReactElement => {
 
   if (error) {
     toast.error(error);
+    dispatch(cleanAuthState());
   }
 
   if (user) {

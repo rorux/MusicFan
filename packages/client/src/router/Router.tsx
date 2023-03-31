@@ -1,6 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
+import { MainPage } from '@pages/main-page';
+import { SignupPage } from '@pages/signup';
+import { SigninPage } from '@pages/signin';
+import { NotFoundPage } from '@pages/not-found-page';
 import { ROUTES } from './routes';
-import { MainPage, NotFoundPage, SigninPage, SignupPage } from '@pages';
 
 export const Router = () => {
   return (

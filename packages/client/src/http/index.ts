@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserAndTokens } from '@features';
+import { UserAndTokens } from '@features/auth';
 import { API_URL, api } from '@api';
 
 const $axios = axios.create({

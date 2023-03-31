@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import { BsShieldFillExclamation, BsPersonBoundingBox, BsPersonSquare } from 'react-icons/bs';
 import { Formik, FormikHelpers } from 'formik';
 import { cn, kebab } from '@bem';
-import { Header } from '@widgets';
-import { Input } from '@components';
+import { Header } from '@widgets/header';
+import { Input } from '@components/input';
 import { ROUTES } from '@router';
-import { CreateUser, register } from '@features';
+import { cleanAuthState, CreateUser, register } from '@features/auth';
 import { useAppDispatch, useAppSelector } from '@store';
 import { initialSignupFormState, signupValidationSchema } from './validation-schema';
 
@@ -22,6 +22,7 @@ export const SignupPage = (): ReactElement => {
 
   if (error) {
     toast.error(error);
+    dispatch(cleanAuthState());
   }
 
   if (user) {
