@@ -55,15 +55,15 @@ export class AuthService {
     return await this.tokensService.removeToken(refreshToken);
   }
 
-  async refresh(refreshToken: string): Promise<PublicUserAndTokensDto> {
+  async refresh(refreshToken: string, i18n: I18nContext): Promise<PublicUserAndTokensDto> {
     if (!refreshToken) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(i18n.t('errors.unauthorized'));
     }
 
     const userDtoFromRefreshToken = await this.tokensService.validateRefreshToken(refreshToken);
     const tokenFromDatabase = await this.tokensService.findToken(refreshToken);
     if (!userDtoFromRefreshToken || !tokenFromDatabase) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(i18n.t('errors.unauthorized'));
     }
 
     const user = await this.usersService.getUserById(userDtoFromRefreshToken.id);
