@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
-import { I18nLang } from 'nestjs-i18n';
+import { I18n, I18nContext } from 'nestjs-i18n';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { FindUserDto } from '../users/dto/find-user.dto';
@@ -19,9 +19,9 @@ export class AuthController {
   async signUp(
     @Body() userDto: CreateUserDto,
     @Res({ passthrough: true }) response: Response,
-    @I18nLang() lang: string,
+    @I18n() i18n: I18nContext,
   ): Promise<PublicUserAndTokensDto> {
-    const publicUserAndTokens = await this.authService.signUp(userDto);
+    const publicUserAndTokens = await this.authService.signUp(userDto, i18n);
     response.cookie('refreshToken', publicUserAndTokens.refreshToken, { maxAge: refreshTokenMaxAge, httpOnly: true });
 
     return publicUserAndTokens;
@@ -33,9 +33,9 @@ export class AuthController {
   async signIn(
     @Body() userDto: FindUserDto,
     @Res({ passthrough: true }) response: Response,
-    @I18nLang() lang: string,
+    @I18n() i18n: I18nContext,
   ): Promise<PublicUserAndTokensDto> {
-    const publicUserAndTokens = await this.authService.signIn(userDto);
+    const publicUserAndTokens = await this.authService.signIn(userDto, i18n);
     response.cookie('refreshToken', publicUserAndTokens.refreshToken, { maxAge: refreshTokenMaxAge, httpOnly: true });
 
     return publicUserAndTokens;

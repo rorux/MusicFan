@@ -1,5 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { I18nContext } from 'nestjs-i18n';
+import { DeleteResult } from 'typeorm';
 import { UsersService } from '../users/users.service';
 import { TokensService } from '../tokens/tokens.service';
 import { User } from '../users/user.entity';
@@ -7,7 +9,6 @@ import { PublicUserDto } from '../users/dto/public-user.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { FindUserDto } from '../users/dto/find-user.dto';
 import { PublicUserAndTokensDto } from './dto/public-user-and-tokens.dto';
-import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -21,10 +22,10 @@ export class AuthService {
     return { user: publicUser, ...tokens };
   }
 
-  async signUp(userDto: CreateUserDto): Promise<PublicUserAndTokensDto> {
+  async signUp(userDto: CreateUserDto, i18n: I18nContext): Promise<PublicUserAndTokensDto> {
     const candidate = await this.usersService.getUserByLogin(userDto.login);
     if (candidate) {
-      throw new BadRequestException(`Пользователь с логином ${userDto.login} уже существует!`);
+      throw new BadRequestException(i18n.t('errors.user-already-exists', { args: { login: userDto.login } }));
     }
     const hashPassword = await bcrypt.hash(userDto.password, 3);
     const user = await this.usersService.createUser({
@@ -36,15 +37,15 @@ export class AuthService {
     return await this.getUserDtoAndTokens(user);
   }
 
-  async signIn(userDto: FindUserDto): Promise<PublicUserAndTokensDto> {
+  async signIn(userDto: FindUserDto, i18n: I18nContext): Promise<PublicUserAndTokensDto> {
     const user = await this.usersService.getUserByLogin(userDto.login);
     if (!user) {
-      throw new BadRequestException('Неверный логин и/или пароль!');
+      throw new BadRequestException(i18n.t('errors.invalid-data', { args: { login: userDto.login } }));
     }
 
     const isPasswordCorrect = await bcrypt.compare(userDto.password, user.password);
     if (!isPasswordCorrect) {
-      throw new BadRequestException('Неверный логин и/или пароль!');
+      throw new BadRequestException(i18n.t('errors.invalid-data', { args: { login: userDto.login } }));
     }
 
     return await this.getUserDtoAndTokens(user);

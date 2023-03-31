@@ -1,1 +1,4 @@
-{}
+{
+  "user-already-exists": "The user with the login {login} already exists!",
+  "invalid-data": "Invalid login and/or password!"
+}
