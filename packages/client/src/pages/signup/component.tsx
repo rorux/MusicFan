@@ -21,7 +21,7 @@ export const SignupPage = (): ReactElement => {
   const { user, error, loading } = useAppSelector((state) => state.auth);
 
   if (error) {
-    toast.error(error === 'error.unknown' ? t(error) : error);
+    toast.error(error);
   }
 
   if (user) {

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import i18n from '../../resources/i18n';
 import $axios from '@http';
 import { api } from '@api';
 import { User, UserAndTokens, AuthState, CreateUser, FindUser } from './types';
@@ -14,7 +15,7 @@ export const register = createAsyncThunk<User, CreateUser, { rejectValue: string
     } catch (error) {
       if (axios.isAxiosError(error)) {
         return rejectWithValue(error.response?.data.message);
-      } else return rejectWithValue('error.unknown');
+      } else return rejectWithValue(i18n.t('error.unknown'));
     }
   },
 );
@@ -29,7 +30,7 @@ export const authorize = createAsyncThunk<User, FindUser, { rejectValue: string 
     } catch (error) {
       if (axios.isAxiosError(error)) {
         return rejectWithValue(error.response?.data.message);
-      } else return rejectWithValue('error.unknown');
+      } else return rejectWithValue(i18n.t('error.unknown'));
     }
   },
 );
