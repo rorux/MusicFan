@@ -9,6 +9,7 @@ export const register = createAsyncThunk<User, CreateUser, { rejectValue: string
   async function (createUser, { rejectWithValue }) {
     try {
       const response = await $axios.post<UserAndTokens>(api.auth.signup, createUser);
+      localStorage.setItem('token', response.data.accessToken);
       return response.data.user;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -23,6 +24,7 @@ export const authorize = createAsyncThunk<User, FindUser, { rejectValue: string 
   async function (findUser, { rejectWithValue }) {
     try {
       const response = await $axios.post<UserAndTokens>(api.auth.signin, findUser);
+      localStorage.setItem('token', response.data.accessToken);
       return response.data.user;
     } catch (error) {
       if (axios.isAxiosError(error)) {
