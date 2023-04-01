@@ -18,16 +18,15 @@ const namespace = 'signin-page';
 export const SigninPage = (): ReactElement => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const { error, loading, isAuth } = useAppSelector((state) => state.auth);
 
-  const { user, error, loading } = useAppSelector((state) => state.auth);
+  if (isAuth) {
+    return <Navigate to={ROUTES.MAIN} />;
+  }
 
   if (error) {
     toast.error(error);
     dispatch(cleanAuthState());
-  }
-
-  if (user) {
-    return <Navigate to={ROUTES.MAIN} />;
   }
 
   const handleSubmit = async (values: FindUser, actions: FormikHelpers<any>) => {

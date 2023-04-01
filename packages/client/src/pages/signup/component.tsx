@@ -18,21 +18,21 @@ const namespace = 'signup-page';
 export const SignupPage = (): ReactElement => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { user, error, loading } = useAppSelector((state) => state.auth);
+  const { error, loading, isAuth } = useAppSelector((state) => state.auth);
+
+  if (isAuth) {
+    return <Navigate to={ROUTES.MAIN} />;
+  }
 
   if (error) {
     toast.error(error);
     dispatch(cleanAuthState());
   }
 
-  if (user) {
-    toast.success(t(`${namespace}.registration-completed`));
-    return <Navigate to={ROUTES.MAIN} />;
-  }
-
   const handleSubmit = async (values: CreateUser, actions: FormikHelpers<any>) => {
     await dispatch(register(values));
     actions.setFieldValue('login', '', false);
+    toast.success(t(`${namespace}.registration-completed`));
   };
 
   return (

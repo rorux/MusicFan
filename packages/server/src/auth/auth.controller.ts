@@ -11,7 +11,7 @@ import { refreshTokenMaxAge } from '../constants';
 @ApiTags('Authorization')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService /*, private i18n: i18nService<i18nTranslations>*/) {}
+  constructor(private authService: AuthService) {}
 
   @ApiOperation({ summary: 'Register and get tokens' })
   @ApiResponse({ status: 201, type: PublicUserAndTokensDto })
