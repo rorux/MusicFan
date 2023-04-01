@@ -53,13 +53,12 @@ export const checkAuth = createAsyncThunk<User, undefined, { rejectValue: string
   },
 );
 
-export const logout = createAsyncThunk<User, undefined, { rejectValue: string }>(
+export const logout = createAsyncThunk<undefined, undefined, { rejectValue: string }>(
   '@@auth/logout',
   async function (_, { rejectWithValue }) {
     try {
-      const response = await $axios.get(api.auth.logout);
+      await $axios.get(api.auth.logout);
       localStorage.removeItem('token');
-      return response.data.user;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         return rejectWithValue(error.response?.data.message);
@@ -79,7 +78,12 @@ const authSlice = createSlice({
   name: '@@auth',
   initialState,
   reducers: {
-    cleanAuthState: () => initialState,
+    cleanAuthState: () => ({
+      isAuth: false,
+      user: null,
+      loading: false,
+      error: null,
+    }),
   },
   extraReducers: (builder) => {
     builder

@@ -2,6 +2,8 @@ import { ReactElement } from 'react';
 import { cn, kebab } from '@bem';
 import { useAppDispatch } from '@store';
 import { logout } from '@features/auth';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@router';
 
 const block = cn('main-page');
 
@@ -12,6 +14,8 @@ export const MainPage = (): ReactElement => {
     <div className="container">
       <h1>Главная страница</h1>
       <button onClick={() => dispatch(logout())}>Выйти</button>
+      <Link to={ROUTES.SIGNIN}>Авторизация</Link>
+      <Link to={ROUTES.SIGNUP}>Регистрация</Link>
       <div className={kebab(block('text-block', ['p-3']))}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non vulputate dolor, ac aliquam velit. Duis
         faucibus sapien in turpis sodales commodo. Maecenas sit amet consequat massa. Duis sit amet pharetra nisi. Nam

@@ -1,1 +1,1 @@
-export * from './component';
+export * from './not-found-page';
