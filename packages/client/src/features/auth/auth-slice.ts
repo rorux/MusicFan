@@ -76,7 +76,7 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: '@@auth',
   initialState,
   reducers: {
     cleanAuthState: () => initialState,

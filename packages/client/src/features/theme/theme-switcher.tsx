@@ -1,14 +1,12 @@
+import { useState } from 'react';
 import { cn, kebab } from '@bem';
-import { useEffect, useState } from 'react';
+import { useTheme } from '@features/theme/use-theme';
 
 const block = cn('theme-switcher');
 
 export const ThemeSwitcher = () => {
   const [checked, setChecked] = useState(true);
-
-  useEffect(() => {
-    document.body.setAttribute('data-theme', checked ? 'dark' : 'light');
-  }, [checked]);
+  useTheme({ checked });
 
   return (
     <div className={kebab(block())}>

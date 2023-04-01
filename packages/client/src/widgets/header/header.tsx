@@ -1,6 +1,6 @@
-import { LangSwitcher } from './ui/lang-switcher';
-import { ThemeSwitcher } from './ui/theme-switcher';
 import { cn, kebab } from '@bem';
+import { ThemeSwitcher } from '@features/theme';
+import { LangSwitcher } from '@features/lang';
 
 const block = cn('header-block');
 

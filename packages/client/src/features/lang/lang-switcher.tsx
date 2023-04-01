@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cn, kebab } from '@bem';
-import i18n from '../../../../resources/i18n';
+import { i18n } from '@resources';
 import { mappedFlagIcons } from './mapped-flag-icons';
 
 const block = cn('lang-switcher');
