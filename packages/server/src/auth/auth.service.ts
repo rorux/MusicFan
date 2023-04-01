@@ -1,7 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { I18nContext } from 'nestjs-i18n';
-import { DeleteResult } from 'typeorm';
 import { UsersService } from '../users/users.service';
 import { TokensService } from '../tokens/tokens.service';
 import { User } from '../users/user.entity';
@@ -51,8 +50,8 @@ export class AuthService {
     return await this.getUserDtoAndTokens(user);
   }
 
-  async logout(refreshToken: string): Promise<DeleteResult> {
-    return await this.tokensService.removeToken(refreshToken);
+  async logout(refreshToken: string): Promise<void> {
+    await this.tokensService.removeToken(refreshToken);
   }
 
   async refresh(refreshToken: string, i18n: I18nContext): Promise<PublicUserAndTokensDto> {

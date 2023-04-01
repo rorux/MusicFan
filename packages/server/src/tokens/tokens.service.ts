@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Token } from './token.entity';
-import { DeleteResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { PublicUserDto } from '../users/dto/public-user.dto';
 import { TokensDto } from './dto/tokens.dto';
-import { accessTokenMaxAge, refreshTokenMaxAge } from '../const';
+import { accessTokenMaxAge, refreshTokenMaxAge } from '../constants';
 
 @Injectable()
 export class TokensService {
@@ -17,11 +17,11 @@ export class TokensService {
   async generateTokens(payload: PublicUserDto): Promise<TokensDto> {
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_ACCESS_SECRET,
-      expiresIn: `${accessTokenMaxAge / 1000}s`,
+      expiresIn: accessTokenMaxAge,
     });
     const refreshToken = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_REFRESH_SECRET,
-      expiresIn: `${refreshTokenMaxAge / 1000}s`,
+      expiresIn: refreshTokenMaxAge,
     });
     return {
       accessToken,
@@ -65,8 +65,8 @@ export class TokensService {
     return newToken;
   }
 
-  async removeToken(refreshToken: string): Promise<DeleteResult> {
-    return await this.tokensRepository.delete({ refreshToken });
+  async removeToken(refreshToken: string): Promise<void> {
+    await this.tokensRepository.delete({ refreshToken });
   }
 
   async findToken(refreshToken: string): Promise<Token> {

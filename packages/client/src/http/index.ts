@@ -22,7 +22,10 @@ $axios.interceptors.response.use(
     if (error.response.status == 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.get<UserAndTokens>(`${API_URL}${api.auth.refresh}`, { withCredentials: true });
+        const response = await axios.get<UserAndTokens>(API_URL + api.auth.refresh, {
+          withCredentials: true,
+          headers: { lang: localStorage.getItem('i18nextLng') ?? 'ru' },
+        });
         localStorage.setItem('token', response.data.accessToken);
         return $axios.request(originalRequest);
       } catch (e) {

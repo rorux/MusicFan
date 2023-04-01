@@ -1,12 +1,17 @@
 import { ReactElement } from 'react';
 import { cn, kebab } from '@bem';
+import { useAppDispatch } from '@store';
+import { logout } from '@features/auth';
 
 const block = cn('main-page');
 
 export const MainPage = (): ReactElement => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="container">
       <h1>Главная страница</h1>
+      <button onClick={() => dispatch(logout())}>Выйти</button>
       <div className={kebab(block('text-block', ['p-3']))}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non vulputate dolor, ac aliquam velit. Duis
         faucibus sapien in turpis sodales commodo. Maecenas sit amet consequat massa. Duis sit amet pharetra nisi. Nam

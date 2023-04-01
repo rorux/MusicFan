@@ -32,9 +32,7 @@ export const SignupPage = (): ReactElement => {
 
   const handleSubmit = async (values: CreateUser, actions: FormikHelpers<any>) => {
     await dispatch(register(values));
-    actions.setFieldValue('name', '', false);
     actions.setFieldValue('login', '', false);
-    actions.setFieldValue('password', '', false);
   };
 
   return (

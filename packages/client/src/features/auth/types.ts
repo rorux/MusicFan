@@ -15,6 +15,7 @@ export type UserAndTokens = {
 } & Tokens;
 
 export type AuthState = {
+  isAuth: boolean;
   user: User | null;
   loading: boolean;
   error: string | null | undefined;

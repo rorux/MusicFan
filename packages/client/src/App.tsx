@@ -1,10 +1,21 @@
+import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer, Flip } from 'react-toastify';
 import { IconContext } from 'react-icons';
+import { useAppDispatch } from '@store';
 import { iconsStyles } from '@context';
 import { Router } from '@router';
+import { checkAuth } from '@features/auth';
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(checkAuth());
+    }
+  }, []);
+
   return (
     <>
       <BrowserRouter>
