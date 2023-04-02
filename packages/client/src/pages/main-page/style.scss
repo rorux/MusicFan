@@ -3,4 +3,17 @@
     background-color: var(--colors-block-bg);
     box-shadow: var(--shadow);
   }
+
+  @include el('search-input') {
+    box-shadow: var(--shadow);
+
+    input {
+      box-shadow: var(--shadow-inset);
+    }
+  }
+
+  @include el('search-btn') {
+    box-shadow: var(--shadow), var(--shadow-inset);
+    background-color: var(--colors-block-bg);
+  }
 }

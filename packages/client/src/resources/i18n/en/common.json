@@ -3,5 +3,6 @@
     "unknown": "Unknown error!"
   },
   "login": "Login",
-  "logout": "Logout"
+  "logout": "Logout",
+  "find": "Find"
 }

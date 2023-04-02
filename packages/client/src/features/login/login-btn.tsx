@@ -4,7 +4,7 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import { cn, kebab } from '@bem';
 import { ROUTES } from '@router';
 
-const block = cn('login-btn');
+const block = cn('auth-btn');
 
 export const LoginBtn = (): React.ReactElement => {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ export const LoginBtn = (): React.ReactElement => {
   return (
     <Link to={ROUTES.SIGNIN}>
       <span className={kebab(block(undefined, ['rounded-0']))}>
-        {t('login')} <BsArrowLeftShort />
+        <small className="d-flex align-items-center text-uppercase">{t('login')}</small> <BsArrowLeftShort />
       </span>
     </Link>
   );

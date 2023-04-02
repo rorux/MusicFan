@@ -1,15 +1,27 @@
-@include block('login-btn') {
+@include block('auth-btn') {
   display: flex;
   border: 1px solid var(--colors-text-additional);
   height: 26px;
-  padding-left: 6px;
-  color: var(--colors-text-basic);
+  padding-left: 10px;
+  padding-right: 4px;
+  color: var(--colors-text-additional);
   cursor: pointer;
 
+  &:hover {
+    border: 1px solid var(--colors-text-basic);
+    color: var(--colors-text-basic);
+
+    /* stylelint-disable */
+    svg {
+      fill: var(--colors-text-basic) !important;
+    }
+  }
+
   svg {
-    fill: var(--colors-text-basic) !important;
+    fill: var(--colors-text-additional) !important;
     height: 24px;
     width: 24px;
     margin: auto;
   }
+  /* stylelint-enable */
 }

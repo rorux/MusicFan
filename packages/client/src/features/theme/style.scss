@@ -6,6 +6,10 @@
   border-radius: 26px;
   border: 1px solid var(--colors-text-additional);
 
+  &:hover {
+    border: 1px solid var(--colors-text-basic);
+  }
+
   @include el('input') {
     display: none;
   }

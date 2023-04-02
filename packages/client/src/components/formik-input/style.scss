@@ -1,0 +1,19 @@
+@include block('formik-input') {
+  @include el('icon') {
+    border-color: var(--colors-divider);
+    background-color: var(--colors-text-additional);
+  }
+
+  @include el('field') {
+    background-color: var(--colors-bg);
+    border-color: var(--colors-divider);
+    color: var(--colors-text-basic) !important;
+    font-weight: var(--fw-light);
+
+    &::placeholder { color: var(--colors-text-additional); }
+
+    &:focus {
+      background-color: var(--colors-bg);
+    }
+  }
+}

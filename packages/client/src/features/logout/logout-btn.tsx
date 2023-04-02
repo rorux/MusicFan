@@ -4,7 +4,7 @@ import { cn, kebab } from '@bem';
 import { useAppDispatch } from '@store';
 import { logout } from '@features/auth';
 
-const block = cn('logout-btn');
+const block = cn('auth-btn');
 
 export const LogoutBtn = (): React.ReactElement => {
   const { t } = useTranslation();

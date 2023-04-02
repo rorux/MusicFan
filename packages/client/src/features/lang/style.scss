@@ -1,6 +1,14 @@
 @include block('lang-switcher') {
   border: 1px solid var(--colors-text-additional);
 
+  &:hover {
+    border: 1px solid var(--colors-text-basic);
+  }
+
+  &:hover > select {
+    color: var(--colors-text-basic);
+  }
+
   .fi {
     box-sizing: border-box;
     box-shadow: 0 0 2px 0 #999;

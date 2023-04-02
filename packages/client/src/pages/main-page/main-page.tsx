@@ -1,21 +1,36 @@
+import { useTranslation } from 'react-i18next';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets/header';
+import { Input } from '@components/input';
+import { Button } from '@components/button';
 
 const block = cn('main-page');
+const namespace = 'main-page';
 
 export const MainPage = (): React.ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Header />
       <div className="container content-wrapper">
-        <h1>Главная страница</h1>
-        <div className={kebab(block('text-block', ['p-3']))}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non vulputate dolor, ac aliquam velit.
-          Duis faucibus sapien in turpis sodales commodo. Maecenas sit amet consequat massa. Duis sit amet pharetra
-          nisi. Nam blandit vestibulum urna, id finibus sapien vulputate eu. Donec ac pretium magna. Nullam ultrices
-          ligula quis velit ultricies, sit amet tempor elit dictum. Pellentesque habitant morbi tristique senectus et
-          netus et malesuada fames ac turpis egestas. Maecenas dui odio, mattis mollis lacus a, imperdiet finibus orci.
-          Quisque quis auctor nisl.
+        <h2 className="text-center my-5">{t(`${namespace}.search-title`)}</h2>
+        <div className="row justify-content-center">
+          <div className="col-lg-9 col-xl-6">
+            <div className="row">
+              <div className="col-9">
+                <Input
+                  type="text"
+                  name="search-band"
+                  placeholder={t(`${namespace}.name-artist-label`)}
+                  className={kebab(block('search-input'))}
+                />
+              </div>
+              <div className="col-3">
+                <Button label={t('find')} className={kebab(block('search-btn'))} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

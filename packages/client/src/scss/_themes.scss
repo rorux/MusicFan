@@ -30,6 +30,7 @@ body[data-theme='dark'] {
   --toastify-text-color-error: #f43f5e;
   --toastify-color-border-error: #8b2b3d;
   --shadow: #3c3c3c 0 0 8px;
+  --shadow-inset: inset #3c3c3c 0 0 3px;
 }
 
 body[data-theme='light'] {
@@ -54,6 +55,7 @@ body[data-theme='light'] {
   --toastify-text-color-error: #f43f5e;
   --toastify-color-border-error: #f595a6;
   --shadow: #ddd 0px 8px 24px;
+  --shadow-inset: inset #ddd 0px 2px 10px;
 }
 
 html, body, #root {

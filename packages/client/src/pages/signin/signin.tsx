@@ -4,7 +4,8 @@ import { BsShieldFillExclamation, BsPersonSquare } from 'react-icons/bs';
 import { Formik } from 'formik';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets/header';
-import { Input } from '@components/input';
+import { FormikInput } from '@components/formik-input';
+import { Button } from '@components/button';
 import { ROUTES } from '@router';
 import { initialSigninFormState, signinValidationSchema } from './validation-schema';
 import { useAuthorization } from './use-authorization';
@@ -37,7 +38,7 @@ export const SigninPage = (): React.ReactElement => {
               {({ handleSubmit, handleChange, values, errors }) => (
                 <form noValidate onSubmit={handleSubmit}>
                   <div className="mb-4 ">
-                    <Input
+                    <FormikInput
                       type="text"
                       name="login"
                       value={values.login}
@@ -49,7 +50,7 @@ export const SigninPage = (): React.ReactElement => {
                     />
                   </div>
                   <div className="mb-4 ">
-                    <Input
+                    <FormikInput
                       type="password"
                       name="password"
                       value={values.password}
@@ -60,22 +61,7 @@ export const SigninPage = (): React.ReactElement => {
                       icon={<BsShieldFillExclamation />}
                     />
                   </div>
-                  <div className=" text-center">
-                    <button
-                      type="submit"
-                      className="btn btn-outline-green w-100 rounded-0 text-uppercase d-flex justify-content-center align-items-center"
-                    >
-                      {loading && (
-                        <span
-                          className="spinner-grow me-1"
-                          style={{ width: '0.7rem', height: '0.7rem' }}
-                          role="status"
-                          aria-hidden="true"
-                        ></span>
-                      )}
-                      <small>{t(`${namespace}.submit-form`)}</small>
-                    </button>
-                  </div>
+                  <Button loading={loading} label={t(`${namespace}.submit-form`)} />
                 </form>
               )}
             </Formik>
