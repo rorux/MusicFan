@@ -2,7 +2,7 @@
   display: flex;
   border: 1px solid var(--colors-text-additional);
   height: 26px;
-  padding-left: 10px;
+  padding-left: 4px;
   padding-right: 4px;
   color: var(--colors-text-additional);
   cursor: pointer;
@@ -24,4 +24,8 @@
     margin: auto;
   }
   /* stylelint-enable */
+
+  @include el('label') {
+    padding-left: 6px;
+  }
 }
