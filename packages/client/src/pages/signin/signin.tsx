@@ -1,4 +1,3 @@
-import { ReactElement } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { BsShieldFillExclamation, BsPersonSquare } from 'react-icons/bs';
@@ -13,7 +12,7 @@ import { useAuthorization } from './use-authorization';
 const block = cn('signup');
 const namespace = 'signin-page';
 
-export const SigninPage = (): ReactElement => {
+export const SigninPage = (): React.ReactElement => {
   const { t } = useTranslation();
   const { loading, isAuth, handleSubmit } = useAuthorization();
 

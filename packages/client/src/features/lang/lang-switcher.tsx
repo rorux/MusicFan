@@ -5,7 +5,7 @@ import { mappedFlagIcons } from './mapped-flag-icons';
 
 const block = cn('lang-switcher');
 
-export const LangSwitcher = () => {
+export const LangSwitcher = (): React.ReactElement => {
   const [selectedLanguage, setSelectedLanguage] = useState(
     (localStorage.getItem('i18nextLng') ?? 'ru') as keyof typeof mappedFlagIcons,
   );

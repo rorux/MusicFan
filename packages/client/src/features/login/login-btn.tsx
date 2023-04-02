@@ -6,7 +6,7 @@ import { ROUTES } from '@router';
 
 const block = cn('login-btn');
 
-export const LoginBtn = () => {
+export const LoginBtn = (): React.ReactElement => {
   const { t } = useTranslation();
 
   return (

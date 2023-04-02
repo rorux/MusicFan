@@ -1,10 +1,9 @@
-import { ReactElement } from 'react';
 import { cn, kebab } from '@bem';
 import { InputProps } from './types';
 
 const block = cn('ui-input');
 
-export const Input = (props: InputProps): ReactElement => {
+export const Input = (props: InputProps): React.ReactElement => {
   const isInvalidClassname = props.isInvalid === true ? 'is-invalid' : undefined;
   const isValidClassname = props.isInvalid === false && props.value ? 'is-valid' : undefined;
 

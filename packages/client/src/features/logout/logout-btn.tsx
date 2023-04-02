@@ -6,7 +6,7 @@ import { logout } from '@features/auth';
 
 const block = cn('logout-btn');
 
-export const LogoutBtn = () => {
+export const LogoutBtn = (): React.ReactElement => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 

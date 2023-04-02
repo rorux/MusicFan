@@ -1,10 +1,9 @@
-import { ReactElement } from 'react';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets/header';
 
 const block = cn('main-page');
 
-export const MainPage = (): ReactElement => {
+export const MainPage = (): React.ReactElement => {
   return (
     <>
       <Header />

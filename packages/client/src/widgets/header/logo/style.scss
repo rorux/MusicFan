@@ -1,0 +1,11 @@
+@include block('logo') {
+  font-weight: 600;
+
+  @include el('first-word') {
+    color: var(--colors-logo-yellow);
+  }
+
+  @include el('second-word') {
+    color: var(--colors-logo-green);
+  }
+}

@@ -4,7 +4,7 @@ import { useTheme } from '@features/theme/use-theme';
 
 const block = cn('theme-switcher');
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = (): React.ReactElement => {
   const [checked, setChecked] = useState(true);
   useTheme({ checked });
 

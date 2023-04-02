@@ -1,9 +1,7 @@
-import { ReactElement } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { BsShieldFillExclamation, BsPersonBoundingBox, BsPersonSquare } from 'react-icons/bs';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets/header';
 import { Input } from '@components/input';
@@ -14,7 +12,7 @@ import { useRegistration } from './use-registration';
 const block = cn('signup');
 const namespace = 'signup-page';
 
-export const SignupPage = (): ReactElement => {
+export const SignupPage = (): React.ReactElement => {
   const { t } = useTranslation();
   const { loading, isAuth, handleSubmit } = useRegistration(t(`${namespace}.registration-completed`));
 
