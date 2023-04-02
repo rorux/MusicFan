@@ -59,6 +59,9 @@
       ],
       "@resources": [
         "src/resources"
+      ],
+      "@hooks": [
+        "src/hooks"
       ]
     }
   },

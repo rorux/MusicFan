@@ -6,14 +6,16 @@ const block = cn('header-block');
 
 export const Header = () => {
   return (
-    <ul className={kebab(block(undefined, ['nav container position-fixed']))}>
-      <li className="flex-grow-1"></li>
-      <li className="nav-item">
-        <LangSwitcher />
-      </li>
-      <li className="nav-item">
-        <ThemeSwitcher />
-      </li>
-    </ul>
+    <div className="position-fixed w-100">
+      <ul className={kebab(block(undefined, ['nav container']))}>
+        <li className="flex-grow-1"></li>
+        <li className="nav-item">
+          <LangSwitcher />
+        </li>
+        <li className="nav-item">
+          <ThemeSwitcher />
+        </li>
+      </ul>
+    </div>
   );
 };

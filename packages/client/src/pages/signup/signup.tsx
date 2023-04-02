@@ -8,32 +8,19 @@ import { cn, kebab } from '@bem';
 import { Header } from '@widgets/header';
 import { Input } from '@components/input';
 import { ROUTES } from '@router';
-import { cleanAuthState, CreateUser, register } from '@features/auth';
-import { useAppDispatch, useAppSelector } from '@store';
 import { initialSignupFormState, signupValidationSchema } from './validation-schema';
+import { useRegistration } from './use-registration';
 
 const block = cn('signup');
 const namespace = 'signup-page';
 
 export const SignupPage = (): ReactElement => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const { error, loading, isAuth } = useAppSelector((state) => state.auth);
+  const { loading, isAuth, handleSubmit } = useRegistration(t(`${namespace}.registration-completed`));
 
   if (isAuth) {
     return <Navigate to={ROUTES.MAIN} />;
   }
-
-  if (error) {
-    toast.error(error);
-    dispatch(cleanAuthState());
-  }
-
-  const handleSubmit = async (values: CreateUser, actions: FormikHelpers<any>) => {
-    await dispatch(register(values));
-    actions.setFieldValue('login', '', false);
-    toast.success(t(`${namespace}.registration-completed`));
-  };
 
   return (
     <>

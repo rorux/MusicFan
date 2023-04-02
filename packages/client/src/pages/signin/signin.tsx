@@ -1,39 +1,25 @@
 import { ReactElement } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { BsShieldFillExclamation, BsPersonSquare } from 'react-icons/bs';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets/header';
 import { Input } from '@components/input';
 import { ROUTES } from '@router';
-import { authorize, cleanAuthState, FindUser } from '@features/auth';
-import { useAppDispatch, useAppSelector } from '@store';
 import { initialSigninFormState, signinValidationSchema } from './validation-schema';
+import { useAuthorization } from './use-authorization';
 
 const block = cn('signup');
 const namespace = 'signin-page';
 
 export const SigninPage = (): ReactElement => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const { error, loading, isAuth } = useAppSelector((state) => state.auth);
+  const { loading, isAuth, handleSubmit } = useAuthorization();
 
   if (isAuth) {
     return <Navigate to={ROUTES.MAIN} />;
   }
-
-  if (error) {
-    toast.error(error);
-    dispatch(cleanAuthState());
-  }
-
-  const handleSubmit = async (values: FindUser, actions: FormikHelpers<any>) => {
-    await dispatch(authorize(values));
-    actions.setFieldValue('login', '', false);
-    actions.setFieldValue('password', '', false);
-  };
 
   return (
     <>

@@ -1,36 +1,20 @@
-import { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer, Flip } from 'react-toastify';
 import { IconContext } from 'react-icons';
-import { useAppDispatch, useAppSelector } from '@store';
 import { iconsStyles } from '@context';
 import { Router } from '@router';
-import { checkAuth } from '@features/auth';
 import { Spinner } from '@components/spinner';
+import { useAppLoading, useAppTheme, useCheckAuth } from '@hooks';
 
 function App() {
-  const [show, setShow] = useState(false);
-  const dispatch = useAppDispatch();
-  const { loading } = useAppSelector((state) => state.auth);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShow(true);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, [show]);
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      dispatch(checkAuth());
-    }
-  }, []);
+  const appLoading = useAppLoading();
+  useCheckAuth();
+  useAppTheme();
 
   return (
     <>
       <BrowserRouter>
-        <IconContext.Provider value={iconsStyles}>{!show || loading ? <Spinner /> : <Router />}</IconContext.Provider>
+        <IconContext.Provider value={iconsStyles}>{appLoading ? <Spinner /> : <Router />}</IconContext.Provider>
       </BrowserRouter>
       <ToastContainer
         transition={Flip}
