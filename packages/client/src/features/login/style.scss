@@ -2,11 +2,12 @@
   display: flex;
   border: 1px solid var(--colors-text-additional);
   height: 26px;
-  width: 26px;
+  padding-left: 6px;
+  color: var(--colors-text-basic);
   cursor: pointer;
 
   svg {
-    fill: var(--colors-text-secondary) !important;
+    fill: var(--colors-text-basic) !important;
     height: 24px;
     width: 24px;
     margin: auto;

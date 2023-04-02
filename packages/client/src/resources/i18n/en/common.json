@@ -1,5 +1,7 @@
 {
   "error": {
     "unknown": "Unknown error!"
-  }
+  },
+  "login": "Login",
+  "logout": "Logout"
 }
