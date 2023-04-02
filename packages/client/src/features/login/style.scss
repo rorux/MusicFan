@@ -1,0 +1,14 @@
+@include block('login-btn') {
+  display: flex;
+  border: 1px solid var(--colors-text-additional);
+  height: 26px;
+  width: 26px;
+  cursor: pointer;
+
+  svg {
+    fill: var(--colors-text-secondary) !important;
+    height: 24px;
+    width: 24px;
+    margin: auto;
+  }
+}
