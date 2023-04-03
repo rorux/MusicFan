@@ -12,9 +12,9 @@ export const LogoutBtn = (): React.ReactElement => {
 
   return (
     <span className={kebab(block(undefined, ['rounded-0']))} onClick={() => dispatch(logout())}>
-      <small className={kebab(block('label', ['d-flex align-items-center text-uppercase d-none d-sm-block']))}>
-        {t('logout')}
-      </small>
+      <span className={kebab(block('label', ['text-uppercase d-none d-sm-block']))}>
+        <small>{t('logout')}</small>
+      </span>
       <BsArrowRightShort />
     </span>
   );

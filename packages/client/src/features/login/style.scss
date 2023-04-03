@@ -6,6 +6,7 @@
   padding-right: 4px;
   color: var(--colors-text-additional);
   cursor: pointer;
+  box-sizing: border-box;
 
   &:hover {
     border: 1px solid var(--colors-text-basic);

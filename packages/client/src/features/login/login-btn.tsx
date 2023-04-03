@@ -12,9 +12,9 @@ export const LoginBtn = (): React.ReactElement => {
   return (
     <Link to={ROUTES.SIGNIN}>
       <span className={kebab(block(undefined, ['rounded-0']))}>
-        <small className={kebab(block('label', ['d-flex align-items-center text-uppercase d-none d-sm-block']))}>
-          {t('login')}
-        </small>
+        <span className={kebab(block('label', ['text-uppercase d-none d-sm-block']))}>
+          <small>{t('login')}</small>
+        </span>
         <BsArrowLeftShort />
       </span>
     </Link>

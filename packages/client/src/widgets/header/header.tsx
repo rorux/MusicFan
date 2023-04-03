@@ -23,10 +23,10 @@ export const Header = (): React.ReactElement => {
         </li>
         <li className="flex-grow-1"></li>
         <li className={kebab(block('item', ['nav-item']))}>
-          <LangSwitcher />
+          <ThemeSwitcher />
         </li>
         <li className={kebab(block('item', ['nav-item']))}>
-          <ThemeSwitcher />
+          <LangSwitcher />
         </li>
         {isAuth && (
           <li className={kebab(block('item', ['nav-item']))}>

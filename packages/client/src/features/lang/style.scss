@@ -1,5 +1,6 @@
 @include block('lang-switcher') {
   border: 1px solid var(--colors-text-additional);
+  box-sizing: border-box;
 
   &:hover {
     border: 1px solid var(--colors-text-basic);
@@ -16,10 +17,12 @@
 
   @include el('select') {
     width: 50px;
+    padding-left: 4px;
     border: none;
     background: var(--colors-block-bg);
     color: var(--colors-text-secondary);
     outline: none;
     cursor: pointer;
+    font-size: 0.9em;
   }
 }
