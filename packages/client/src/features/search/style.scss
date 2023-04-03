@@ -1,0 +1,14 @@
+@include block('search') {
+  @include el('input') {
+    box-shadow: var(--shadow);
+
+    input {
+      box-shadow: var(--shadow-inset);
+    }
+  }
+
+  @include el('submit-btn') {
+    box-shadow: var(--shadow), var(--shadow-inset);
+    background-color: var(--colors-block-bg);
+  }
+}

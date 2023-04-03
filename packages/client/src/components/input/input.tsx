@@ -10,6 +10,8 @@ export const Input = (props: InputProps): React.ReactElement => {
       <input
         type={props.type}
         name={props.name}
+        value={props.value}
+        onChange={(event) => props.onChange(event)}
         className={kebab(block('field', ['form-control rounded-0']))}
         placeholder={props.placeholder}
       />
