@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { UserAndTokens } from '@features/auth';
-import { API_URL, api } from '@api';
+import { API_URL, api, MUSIC_API_URL } from '@api';
 
 const $axios = axios.create({
   withCredentials: true,
@@ -37,3 +37,7 @@ $axios.interceptors.response.use(
 );
 
 export default $axios;
+
+export const $axios_music = axios.create({
+  baseURL: MUSIC_API_URL,
+});

@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn, kebab } from '@bem';
+import { findAlbumsByArtist } from '@features/search/search-slice';
 import { Input } from '@components/input';
 import { Button } from '@components/button';
 import { useDebounce } from './use-debounce';
+import { useAppDispatch, useAppSelector } from '@store';
 
-const block = cn('search');
 const namespace = 'search';
+const block = cn(namespace);
 
 export const Search = (): React.ReactElement => {
   const [search, setSearch] = useState('');
-  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const debounced = useDebounce(search);
+  const { t } = useTranslation();
+  const { error, loading, albums } = useAppSelector((state) => state.search);
 
   useEffect(() => {
-    console.log(debounced);
-  }, [debounced]);
+    if (debounced) dispatch(findAlbumsByArtist(debounced));
+  }, [debounced, dispatch]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
