@@ -1,9 +1,9 @@
-export type AlbumsResponse = {
-  pagination: AlbumsPagination;
-  results: Album[];
+export type MusicResponse<T> = {
+  pagination: Pagination;
+  results: T[];
 };
 
-export type AlbumsPagination = {
+export type Pagination = {
   page: number;
   pages: number;
   per_page: number;
@@ -22,17 +22,30 @@ export type Album = {
   year: string;
   genre: string[];
   style: string[];
-  master_id: number;
-  master_url: string;
+  master_id: number | null;
+  master_url: string | null;
   uri: string;
   title: string;
   thumb: string;
   cover_image: string;
 };
 
+export type Artist = {
+  id: number;
+  type: 'artist';
+  master_id: number | null;
+  master_url: string | null;
+  uri: string;
+  title: string;
+  thumb: string;
+  cover_image: string;
+  resource_url: string;
+};
+
 export type SearchState = {
+  artists: Artist[];
   albums: Album[];
-  pagination: AlbumsPagination | null;
+  pagination: Pagination | null;
   loading: boolean;
   error: string | null | undefined;
 };

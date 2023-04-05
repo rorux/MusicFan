@@ -1,7 +1,7 @@
 import { ButtonProps } from './types';
 
 export const Button = (props: ButtonProps): React.ReactElement => {
-  const className = `btn btn-outline-green w-100 rounded-0 text-uppercase d-flex justify-content-center align-items-center ${props.className}`;
+  const className = `btn btn-outline-green w-100 h-100 rounded-0 text-uppercase d-flex justify-content-center align-items-center ${props.className}`;
 
   return (
     <button type="submit" className={className}>

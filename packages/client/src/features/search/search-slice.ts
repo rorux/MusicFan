@@ -4,13 +4,27 @@ import { RootState } from '@store';
 import { $axios_music } from '@http';
 import { i18n } from '@resources';
 import { api } from '@api';
-import { AlbumsResponse, SearchState } from './types';
+import { Album, Artist, MusicResponse, SearchState } from './types';
 
-export const findAlbumsByArtist = createAsyncThunk<AlbumsResponse, string, { rejectValue: string }>(
+export const findAlbumsByArtist = createAsyncThunk<MusicResponse<Album>, string, { rejectValue: string }>(
   '@@search/albums',
   async function (artist, { rejectWithValue }) {
     try {
-      const response = await $axios_music.get<AlbumsResponse>(api.music.albums(artist));
+      const response = await $axios_music.get<MusicResponse<Album>>(api.music.albums(artist));
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data.message);
+      } else return rejectWithValue(i18n.t('error.unknown'));
+    }
+  },
+);
+
+export const findArtist = createAsyncThunk<MusicResponse<Artist>, string, { rejectValue: string }>(
+  '@@search/artists',
+  async function (search, { rejectWithValue }) {
+    try {
+      const response = await $axios_music.get<MusicResponse<Artist>>(api.music.artist(search));
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -21,6 +35,7 @@ export const findAlbumsByArtist = createAsyncThunk<AlbumsResponse, string, { rej
 );
 
 const initialState: SearchState = {
+  artists: [],
   albums: [],
   pagination: null,
   loading: false,
@@ -39,6 +54,15 @@ const searchSlice = createSlice({
       })
       .addCase(findAlbumsByArtist.fulfilled, (state, action) => {
         state.albums = action.payload.results;
+        state.pagination = action.payload.pagination;
+        state.loading = false;
+      })
+      .addCase(findArtist.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(findArtist.fulfilled, (state, action) => {
+        state.artists = action.payload.results;
         state.pagination = action.payload.pagination;
         state.loading = false;
       })

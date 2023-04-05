@@ -14,6 +14,8 @@ export const Input = (props: InputProps): React.ReactElement => {
         onChange={(event) => props.onChange(event)}
         className={kebab(block('field', ['form-control rounded-0']))}
         placeholder={props.placeholder}
+        onBlur={props.onBlur}
+        onFocus={props.onFocus}
       />
     </div>
   );

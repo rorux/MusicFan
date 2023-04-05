@@ -12,3 +12,38 @@
     background-color: var(--colors-block-bg);
   }
 }
+
+@include block('dropdown') {
+  height: 20rem;
+
+  & {
+    scrollbar-color: var(--colors-text-additional) var(--colors-divider);
+  }
+
+  &::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--colors-divider);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--colors-scrollbar-thumb);
+  }
+
+  @include el('item') {
+    background-color: var(--colors-block-bg);
+    border: 1px solid var(--colors-divider);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--colors-bg);
+    }
+  }
+
+  @include el('artist-label') {
+    color: var(--colors-text-additional);
+  }
+}

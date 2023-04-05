@@ -7,4 +7,6 @@ export type InputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   icon?: JSX.Element;
+  onBlur?: () => void;
+  onFocus?: () => void;
 } & IClassNameProps;

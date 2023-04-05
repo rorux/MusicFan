@@ -20,6 +20,7 @@ body[data-theme='dark'] {
   --colors-bg: #161618;
   --colors-block-bg: #1e1e20;
   --colors-divider: rgb(82 82 89 / 32%);
+  --colors-scrollbar-thumb: #444;
   --toastify-color-success: #1c2e2d;
   --toastify-text-color-success: #12b59d;
   --toastify-color-border-success: #177265;
@@ -45,6 +46,7 @@ body[data-theme='light'] {
   --colors-bg: #f6f6f7;
   --colors-block-bg: #fff;
   --colors-divider: rgb(60 60 67 / 12%);
+  --colors-scrollbar-thumb: #c8c8c8;
   --toastify-color-success: #e6f8f5;
   --toastify-text-color-success: #0c7c6c;
   --toastify-color-border-success: #78b9b0;

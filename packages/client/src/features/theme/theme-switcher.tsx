@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { cn, kebab } from '@bem';
 import { useTheme } from '@features/theme/use-theme';
+import { useAppSelector } from '@store';
 
 const block = cn('theme-switcher');
 
 export const ThemeSwitcher = (): React.ReactElement => {
-  const [checked, setChecked] = useState(true);
+  const theme = useAppSelector((state) => state.theme);
+  const [checked, setChecked] = useState(theme === 'dark' ? true : false);
   useTheme({ checked });
 
   return (
