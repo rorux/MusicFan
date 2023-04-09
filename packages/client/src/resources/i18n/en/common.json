@@ -4,5 +4,6 @@
   },
   "login": "Login",
   "logout": "Logout",
-  "find": "Find"
+  "find": "Find",
+  "not-specified": "Not specified"
 }

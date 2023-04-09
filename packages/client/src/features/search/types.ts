@@ -20,6 +20,7 @@ export type Album = {
   id: number;
   country: string;
   year: string;
+  format: string[];
   genre: string[];
   style: string[];
   master_id: number | null;

@@ -1,0 +1,29 @@
+@include block('albums-item') {
+  background-color: var(--colors-block-bg);
+  cursor: default;
+
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+
+  @include el('title') {
+    color: var(--colors-text-secondary);
+    font-weight: 600;
+
+    &:hover {
+      color: var(--colors-text-basic);
+    }
+  }
+
+  @include el('country') {
+    color: var(--colors-text-additional)
+  }
+
+  @include el('style') {
+    color: var(--colors-text-additional)
+  }
+
+  @include el('format') {
+    color: var(--colors-text-additional)
+  }
+}
