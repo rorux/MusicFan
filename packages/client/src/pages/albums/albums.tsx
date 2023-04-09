@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Header } from '@widgets/header';
-import { AlbumsBlock } from '@pages/albums/albums-block';
 import { Spinner } from '@components/spinner';
 import { ROUTES } from '@router';
+import { AlbumsBlock } from './albums-block';
 import { useAlbums } from './use-albums';
-import { useTranslation } from 'react-i18next';
 
 export const AlbumsPage = (): React.ReactElement => {
   const { t } = useTranslation();

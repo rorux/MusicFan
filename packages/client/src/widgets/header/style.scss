@@ -1,13 +1,19 @@
 @import './logo/style';
 
 @include block('header-block') {
-  li {
-    padding: 1rem 0.5rem;
-  }
+  background-color: var(--colors-bg);
+  box-shadow: var(--shadow);
+  z-index: $zindex-tooltip;
 
-  @include el('item') {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  @include el('list') {
+    li {
+      padding: 1rem 0.5rem;
+    }
+
+    @include el('item') {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

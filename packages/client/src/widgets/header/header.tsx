@@ -16,8 +16,8 @@ export const Header = (): React.ReactElement => {
   const isAuthPage = location.pathname === ROUTES.SIGNUP || location.pathname === ROUTES.SIGNIN;
 
   return (
-    <div className="position-fixed w-100">
-      <ul className={kebab(block(undefined, ['nav container pe-0']))}>
+    <div className={kebab(block(undefined, ['position-fixed w-100']))}>
+      <ul className={kebab(block('list', ['nav container pe-0']))}>
         <li className={kebab(block('item', ['nav-item']))}>
           <Logo />
         </li>
