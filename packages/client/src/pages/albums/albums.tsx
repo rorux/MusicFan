@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '@widgets/header';
 import { Spinner } from '@components/spinner';
 import { ROUTES } from '@router';
+import { BackBtn } from '@components/back-btn';
 import { AlbumsBlock } from './albums-block';
 import { useAlbums } from './use-albums';
 
@@ -24,7 +25,12 @@ export const AlbumsPage = (): React.ReactElement => {
     <>
       <Header />
       <div className="container content-wrapper">
-        <h2 className="text-center mt-2 mt-md-5 mb-3 mb-md-5">{artist}</h2>
+        <h2 className="position-relative text-center px-5 mt-2 mt-md-5 mb-3 mb-md-5">
+          <span className="position-absolute" style={{ left: 0 }}>
+            <BackBtn route={ROUTES.MAIN} />
+          </span>
+          {artist}
+        </h2>
         {loading ? <Spinner /> : albums.length > 0 ? <AlbumsBlock albums={albums} /> : noAlbums}
       </div>
     </>

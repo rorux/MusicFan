@@ -2,8 +2,16 @@ a {
   color: var(--colors-link);
   text-decoration: none;
 
+  svg {
+    fill: var(--colors-link) !important;
+  }
+
   &:hover {
     color: var(--colors-link-hover);
+
+    svg {
+      fill: var(--colors-link-hover) !important;
+    }
   }
 }
 
