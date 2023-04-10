@@ -26,14 +26,20 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
         <div className={kebab(block('picture', ['mb-2']))}>
           <img src={album.cover_image} alt={album.title} className="w-100" />
         </div>
-        <div className={kebab(block('country'))}>
-          {t('albums-page.country')} – {country}
+        <div className={kebab(block('detail'))}>
+          <small>
+            <span className={kebab(block('detail-label'))}>{t('albums-page.country')}</span> – {country}
+          </small>
         </div>
-        <div className={kebab(block('style'))}>
-          {t('albums-page.style')} – {styles}
+        <div className={kebab(block('detail'))}>
+          <small>
+            <span className={kebab(block('detail-label'))}>{t('albums-page.style')}</span> – {styles}
+          </small>
         </div>
-        <div className={kebab(block('format'))}>
-          {t('albums-page.format')} – {formats}
+        <div className={kebab(block('detail'))}>
+          <small>
+            <span className={kebab(block('detail-label'))}>{t('albums-page.format')}</span> – {formats}
+          </small>
         </div>
       </div>
     </div>

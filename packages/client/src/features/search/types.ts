@@ -16,6 +16,13 @@ export type Pagination = {
   };
 };
 
+export type PaginationRequest = {
+  page?: number;
+  perPage?: number;
+  sort?: string;
+  sortOrder?: string;
+};
+
 export type Album = {
   id: number;
   country: string;
@@ -50,3 +57,7 @@ export type SearchState = {
   loading: boolean;
   error: string | null | undefined;
 };
+
+export type FindAlbums = {
+  artist: string;
+} & PaginationRequest;

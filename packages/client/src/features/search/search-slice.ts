@@ -4,13 +4,15 @@ import { RootState } from '@store';
 import { $axios_music } from '@http';
 import { i18n } from '@resources';
 import { api } from '@api';
-import { Album, Artist, MusicResponse, SearchState } from './types';
+import { Album, Artist, FindAlbums, MusicResponse, SearchState } from './types';
 
-export const findAlbumsByArtist = createAsyncThunk<MusicResponse<Album>, string, { rejectValue: string }>(
+export const findAlbumsByArtist = createAsyncThunk<MusicResponse<Album>, FindAlbums, { rejectValue: string }>(
   '@@search/albums',
-  async function (artist, { rejectWithValue }) {
+  async function ({ artist, page, perPage, sort, sortOrder }, { rejectWithValue }) {
     try {
-      const response = await $axios_music.get<MusicResponse<Album>>(api.music.albums(artist));
+      const response = await $axios_music.get<MusicResponse<Album>>(
+        api.music.albums(artist, page, perPage, sort, sortOrder),
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {

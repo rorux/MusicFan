@@ -1,9 +1,9 @@
 import i18n, { InitOptions } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
+import { IsDevelopment } from '@constants';
 import translationEn from './en/translation';
 import translationRu from './ru/translation';
-import { IsDevelopment } from '../../constants';
 
 const initOptions: InitOptions = {
   lng: localStorage.getItem('i18nextLng') ?? 'ru',
