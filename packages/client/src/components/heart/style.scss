@@ -1,0 +1,7 @@
+@include block('heart') {
+  fill: var(--colors-logo-yellow) !important;
+
+  &:hover {
+    fill: #f8cf54 !important;
+  }
+}

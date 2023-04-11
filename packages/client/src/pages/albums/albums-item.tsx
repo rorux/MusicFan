@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { cn, kebab } from '@bem';
 import { ROUTES } from '@router';
+import { Heart } from '@components/heart';
 import { AlbumsItemProps } from './types';
 
 const block = cn('albums-item');
@@ -17,12 +18,17 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
   return (
     <div className="col-12 col-sm-6 col-md-4 col-xl-3 px-2 pb-3">
       <div className={kebab(block(undefined, ['card px-4 py-3 h-100 rounded-0']))}>
-        <Link to={ROUTES.MAIN} className={kebab(block('title', ['mb-2']))}>
-          <div>
-            {album.title}
-            {year}
+        <div className="d-flex">
+          <Link to={ROUTES.MAIN} className={kebab(block('title', ['mb-2 me-2']))}>
+            <div>
+              {album.title}
+              {year}
+            </div>
+          </Link>
+          <div className={kebab(block('heart-wrapper'))}>
+            <Heart onClick={() => console.log('albumId', album.id)} />
           </div>
-        </Link>
+        </div>
         <div className={kebab(block('picture', ['mb-2']))}>
           <img src={album.cover_image} alt={album.title} className="w-100" />
         </div>
