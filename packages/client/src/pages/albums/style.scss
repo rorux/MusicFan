@@ -9,6 +9,7 @@
   @include el('title') {
     color: var(--colors-text-secondary);
     font-weight: 600;
+    cursor: pointer;
 
     &:hover {
       color: var(--colors-text-basic);

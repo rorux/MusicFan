@@ -3,7 +3,7 @@
 @include block('header-block') {
   background-color: var(--colors-bg);
   box-shadow: var(--shadow);
-  z-index: $zindex-tooltip;
+  z-index: $zindex-fixed;
 
   @include el('list') {
     li {

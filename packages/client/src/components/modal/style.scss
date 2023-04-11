@@ -1,0 +1,30 @@
+@include block('modal-window') {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 80%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  outline: 0;
+  z-index: $zindex-modal;
+  pointer-events: none;
+
+  &.active {
+    pointer-events: all;
+  }
+
+  @include el('content') {
+    background-color: var(--colors-bg);
+    border: 1px solid var(--colors-scrollbar-thumb);
+  }
+
+  @include el('header') {
+    border-bottom-color: var(--colors-divider);
+    color: var(--colors-text-basic);
+  }
+
+  @include el('body') {
+    color: var(--colors-text-secondary);
+  }
+}

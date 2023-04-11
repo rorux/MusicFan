@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn, kebab } from '@bem';
-import { ROUTES } from '@router';
 import { Heart } from '@components/heart';
 import { AlbumsItemProps } from './types';
+import { Modal } from '@components/modal';
 
 const block = cn('albums-item');
 
 export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
+  const [isOpenAlbumModal, setOpenAlbumModal] = useState(false);
   const { t } = useTranslation();
 
   const year = album.year ? ` (${album.year})` : undefined;
@@ -19,12 +20,10 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
     <div className="col-12 col-sm-6 col-md-4 col-xl-3 px-2 pb-3">
       <div className={kebab(block(undefined, ['card px-4 py-3 h-100 rounded-0']))}>
         <div className="d-flex">
-          <Link to={ROUTES.MAIN} className={kebab(block('title', ['mb-2 me-2']))}>
-            <div>
-              {album.title}
-              {year}
-            </div>
-          </Link>
+          <div className={kebab(block('title', ['mb-2 me-2']))} onClick={() => setOpenAlbumModal(true)}>
+            {album.title}
+            {year}
+          </div>
           <div className={kebab(block('heart-wrapper'))}>
             <Heart onClick={() => console.log('albumId', album.id)} />
           </div>
@@ -48,6 +47,7 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
           </small>
         </div>
       </div>
+      <Modal isOpen={isOpenAlbumModal} setOpen={setOpenAlbumModal} />
     </div>
   );
 };
