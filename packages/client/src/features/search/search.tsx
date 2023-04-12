@@ -4,13 +4,11 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { cn, kebab } from '@bem';
 import { useClickOutside } from '@hooks';
-import { findArtist } from '@features/search/search-slice';
-import { Input } from '@components/input';
-import { Button } from '@components/button';
-import { Spinner } from '@components/spinner';
+import { findArtist } from '@features/search';
 import { useAppDispatch, useAppSelector } from '@store';
-import { useDebounce } from './use-debounce';
 import { ROUTES } from '@router';
+import { Button, Input, Spinner } from '@components';
+import { useDebounce } from './use-debounce';
 
 const namespace = 'search';
 const block = cn(namespace);

@@ -9,10 +9,13 @@
   @include el('title') {
     color: var(--colors-text-secondary);
     font-weight: 600;
-    cursor: pointer;
 
-    &:hover {
-      color: var(--colors-text-basic);
+    @include mod('link') {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--colors-text-basic);
+      }
     }
   }
 
@@ -26,17 +29,19 @@
   }
 
   @include el('heart-wrapper') {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 8px;
-
     svg {
       width: 20px;
       height: 20px;
       cursor: pointer;
     }
+  }
+
+  @include el('spinner') {
+    align-items: start !important;
+  }
+
+  @include el('tracklist-label') {
+    color: var(--colors-text-secondary);
+    font-weight: 600;
   }
 }

@@ -4,9 +4,8 @@ import { BsShieldFillExclamation, BsPersonSquare } from 'react-icons/bs';
 import { Formik } from 'formik';
 import { cn, kebab } from '@bem';
 import { Header } from '@widgets/header';
-import { FormikInput } from '@components/formik-input';
-import { Button } from '@components/button';
 import { ROUTES } from '@router';
+import { Button, FormikInput } from '@components';
 import { initialSigninFormState, signinValidationSchema } from './validation-schema';
 import { useAuthorization } from './use-authorization';
 

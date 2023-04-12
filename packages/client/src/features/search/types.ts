@@ -38,6 +38,35 @@ export type Album = {
   cover_image: string;
 };
 
+export type Track = {
+  position: string;
+  type_: string;
+  title: string;
+  duration?: string;
+};
+
+export type Video = {
+  uri: string;
+  title: string;
+  description: string;
+  duration: number;
+  embed: boolean;
+};
+
+export type AlbumFullInfo = {
+  id: number;
+  title: string;
+  artists: Array<{
+    name: string;
+    id: number;
+    resource_url: string;
+  }>;
+  styles: Array<string>;
+  tracklist: Array<Track>;
+  videos: Array<Video>;
+  year: number;
+};
+
 export type Artist = {
   id: number;
   type: 'artist';
@@ -53,8 +82,10 @@ export type Artist = {
 export type SearchState = {
   artists: Artist[];
   albums: Album[];
+  album: AlbumFullInfo | null;
   pagination: Pagination | null;
   loading: boolean;
+  albumLoading: boolean;
   error: string | null | undefined;
 };
 

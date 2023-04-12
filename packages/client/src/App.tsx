@@ -3,7 +3,7 @@ import { ToastContainer, Flip } from 'react-toastify';
 import { IconContext } from 'react-icons';
 import { iconsStyles } from '@context';
 import { Router } from '@router';
-import { Spinner } from '@components/spinner';
+import { Spinner } from '@components';
 import { useAppLoading, useAppTheme, useCheckAuth } from '@hooks';
 
 function App() {

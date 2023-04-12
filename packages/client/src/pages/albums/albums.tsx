@@ -1,9 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Header } from '@widgets/header';
-import { Spinner } from '@components/spinner';
 import { ROUTES } from '@router';
-import { BackBtn } from '@components/back-btn';
+import { BackBtn, Spinner } from '@components';
 import { AlbumsBlock } from './albums-block';
 import { useAlbums } from './use-albums';
 

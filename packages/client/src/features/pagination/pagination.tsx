@@ -1,7 +1,7 @@
 import { useAppSelector } from '@store';
 import { Link, useLocation } from 'react-router-dom';
 import { perPageItemsCount } from '@constants';
-import { Spinner } from '@components/spinner';
+import { Spinner } from '@components';
 import { cn, kebab } from '@bem';
 
 const namespace = 'pagination-block';

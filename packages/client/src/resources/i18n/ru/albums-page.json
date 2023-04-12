@@ -3,5 +3,7 @@
   "style": "Стиль",
   "format": "Формат",
   "no-albums": "Не найдено альбомов...",
-  "back-to-search": "Назад к поиску"
+  "back-to-search": "Назад к поиску",
+  "tracklist-empty": "Информация о треках отсутствует...",
+  "tracklist-label": "Список треков:"
 }

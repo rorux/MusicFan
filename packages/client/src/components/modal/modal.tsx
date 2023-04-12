@@ -22,7 +22,7 @@ export const Modal = (props: ModalWindowProps) => {
         <div className="modal-dialog" ref={modalRef}>
           <div className={kebab(block('content', ['modal-content rounded-0']))}>
             <div className={kebab(block('header', ['modal-header']))}>
-              <span className="modal-title h5">Modal title</span>
+              <span className="modal-title h5">{props.title}</span>
               <button
                 type="button"
                 className="btn-close"
@@ -31,7 +31,7 @@ export const Modal = (props: ModalWindowProps) => {
                 onClick={() => props.setOpen(false)}
               ></button>
             </div>
-            <div className={kebab(block('body', ['modal-body']))}>Modal window</div>
+            <div className={kebab(block('body', ['modal-body']))}>{props.children}</div>
           </div>
         </div>
       </div>

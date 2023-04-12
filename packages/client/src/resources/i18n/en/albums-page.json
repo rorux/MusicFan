@@ -3,5 +3,7 @@
   "style": "Style",
   "format": "Format",
   "no-albums": "No albums found...",
-  "back-to-search": "Back to search"
+  "back-to-search": "Back to search",
+  "tracklist-empty": "Tracks information is missing...",
+  "tracklist-label": "Tracklist:"
 }
