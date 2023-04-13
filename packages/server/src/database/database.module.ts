@@ -3,8 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from '../users/user.entity';
 import { Token } from '../tokens/token.entity';
+import { Favourite } from '../favourites/favourite.entity';
 import { CreateTableUsers1679342186052 } from '../../db/migrations/1679342186052-CreateTableUsers';
 import { CreateTableTokens1679518526354 } from '../../db/migrations/1679518526354-CreateTableTokens';
+import { CreateTableFavourites1681388357632 } from '../../db/migrations/1681388357632-CreateTableFavourites';
 
 @Module({
   imports: [
@@ -18,8 +20,8 @@ import { CreateTableTokens1679518526354 } from '../../db/migrations/167951852635
         database: config.get<string>('POSTGRES_DATABASE'),
         host: config.get<string>('POSTGRES_HOST'),
         port: Number(config.get<number>('POSTGRES_PORT')),
-        entities: [User, Token],
-        migrations: [CreateTableUsers1679342186052, CreateTableTokens1679518526354],
+        entities: [User, Token, Favourite],
+        migrations: [CreateTableUsers1679342186052, CreateTableTokens1679518526354, CreateTableFavourites1681388357632],
         migrationsRun: true,
         migrationsTableName: 'migrations',
         synchronize: false,
