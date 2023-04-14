@@ -36,20 +36,6 @@ export const getAlbumFullInfo = createAsyncThunk<AlbumFullInfo, string, { reject
   },
 );
 
-export const findArtist = createAsyncThunk<MusicResponse<Artist>, string, { rejectValue: string }>(
-  '@@search/artists',
-  async function (search, { rejectWithValue }) {
-    try {
-      const response = await $axios_music.get<MusicResponse<Artist>>(api.music.artist(search));
-      return toCamelCase(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.response?.data.message);
-      } else return rejectWithValue(i18n.t('error.unknown'));
-    }
-  },
-);
-
 const initialState: SearchState = {
   artists: [],
   albums: [],
@@ -91,15 +77,6 @@ const searchSlice = createSlice({
       .addCase(getAlbumFullInfo.fulfilled, (state, action) => {
         state.album = action.payload;
         state.albumLoading = false;
-      })
-      .addCase(findArtist.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(findArtist.fulfilled, (state, action) => {
-        state.artists = action.payload.results;
-        state.pagination = action.payload.pagination;
-        state.loading = false;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;

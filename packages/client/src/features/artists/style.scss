@@ -1,4 +1,4 @@
-@include block('search') {
+@include block('artists') {
   @include el('input') {
     box-shadow: var(--shadow);
 

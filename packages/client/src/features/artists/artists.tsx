@@ -4,27 +4,27 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { cn, kebab } from '@bem';
 import { useClickOutside } from '@hooks';
-import { findArtist } from '@features/search';
+import { findArtist } from '@features/artists';
 import { useAppDispatch, useAppSelector } from '@store';
 import { ROUTES } from '@router';
 import { Button, Input, Spinner } from '@components';
 import { useDebounce } from './use-debounce';
 
-const namespace = 'search';
+const namespace = 'artists';
 const block = cn(namespace);
 const dropdownBlock = cn('dropdown');
 
-export const Search = (): React.ReactElement => {
+export const Artists = (): React.ReactElement => {
   const [search, setSearch] = useState('');
   const [dropdown, setDropdown] = useState(false);
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const debounced = useDebounce(search);
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const dropdownRef = useRef(null);
   useClickOutside(dropdownRef, () => setDropdown(false));
 
-  const { error, loading, artists } = useAppSelector((state) => state.search);
+  const { error, loading, data } = useAppSelector((state) => state.artists);
 
   const getArtist = () => {
     if (debounced.length > 2) {
@@ -79,12 +79,12 @@ export const Search = (): React.ReactElement => {
               <div className="col col-md-9">
                 {loading ? (
                   <Spinner />
-                ) : !!artists.length && dropdown ? (
+                ) : !!data.length && dropdown ? (
                   <ul
                     ref={dropdownRef}
                     className={kebab(dropdownBlock(undefined, ['list-group rounded-0 overflow-auto']))}
                   >
-                    {artists.map((artist) => (
+                    {data.map((artist) => (
                       <Link key={artist.id} to={`${ROUTES.ALBUMS}/${artist.title}`}>
                         <li className={kebab(dropdownBlock('item', ['list-group-item d-flex']))}>
                           <span className={kebab(dropdownBlock('artist-label'))}>{artist.title}</span>
