@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class AddFavouriteDto {
   @ApiProperty({ example: '12345', description: 'User ID' })
-  userId: number;
+  userId?: number;
 
   @ApiProperty({ example: '12345', description: 'Album ID' })
   albumId: number;

@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Token } from './token.entity';
+import { I18nContext } from 'nestjs-i18n';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { Token } from './token.entity';
 import { PublicUserDto } from '../users/dto/public-user.dto';
 import { TokensDto } from './dto/tokens.dto';
 import { accessTokenMaxAge, refreshTokenMaxAge } from '../constants';
@@ -29,12 +30,30 @@ export class TokensService {
     };
   }
 
-  async validateAccessToken(token: string): Promise<PublicUserDto> {
+  decodeAuthHeader(authHeader: string, i18n: I18nContext): PublicUserDto {
+    if (!authHeader) {
+      throw new UnauthorizedException(i18n.t('errors.unauthorized'));
+    }
+
+    const accessToken = authHeader.split(' ')[1];
+    if (!accessToken) {
+      throw new UnauthorizedException(i18n.t('errors.unauthorized'));
+    }
+
+    const publicUser = this.validateAccessToken(accessToken);
+    if (!publicUser) {
+      throw new UnauthorizedException(i18n.t('errors.unauthorized'));
+    }
+
+    return publicUser;
+  }
+
+  validateAccessToken(token: string): PublicUserDto {
     try {
-      const userData = await this.jwtService.verifyAsync<PublicUserDto>(token, {
+      const publicUser = this.jwtService.verify<PublicUserDto>(token, {
         secret: process.env.JWT_ACCESS_SECRET,
       });
-      return userData;
+      return publicUser;
     } catch (e) {
       return null;
     }
@@ -42,10 +61,10 @@ export class TokensService {
 
   async validateRefreshToken(token: string): Promise<PublicUserDto> {
     try {
-      const userData = await this.jwtService.verifyAsync<PublicUserDto>(token, {
+      const publicUser = await this.jwtService.verifyAsync<PublicUserDto>(token, {
         secret: process.env.JWT_REFRESH_SECRET,
       });
-      return userData;
+      return publicUser;
     } catch (e) {
       return null;
     }
