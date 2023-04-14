@@ -1,8 +1,3 @@
-export type MusicResponse<T> = {
-  pagination: Pagination;
-  results: T[];
-};
-
 export type Pagination = {
   page: number;
   pages: number;
@@ -88,7 +83,3 @@ export type SearchState = {
   albumLoading: boolean;
   error: string | null | undefined;
 };
-
-export type FindAlbums = {
-  artist: string;
-} & PaginationRequest;

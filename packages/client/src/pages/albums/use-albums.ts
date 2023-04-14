@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '@store';
-import { Album, cleanError, findAlbumsByArtist } from '@features/search';
+import { Album, findAlbumsByArtist } from '@features/albums';
+import { Pagination } from '@features/pagination';
 
-export const useAlbums = (artist: string): { loading: boolean; albums: Album[] } => {
+export const useAlbums = (artist: string): { loading: boolean; albums: Album[]; pagination: Pagination | null } => {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
-  const { error, loading, albums } = useAppSelector((state) => state.search);
+  const { error, loading, data, pagination } = useAppSelector((state) => state.albums);
 
   const page = searchParams.get('page') !== null ? parseInt(searchParams.get('page') as string, 10) : undefined;
   const perPage =
@@ -19,8 +20,7 @@ export const useAlbums = (artist: string): { loading: boolean; albums: Album[] }
 
   if (error) {
     toast.error(error);
-    dispatch(cleanError());
   }
 
-  return { loading, albums };
+  return { loading, albums: data, pagination };
 };

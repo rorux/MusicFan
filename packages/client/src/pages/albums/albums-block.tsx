@@ -1,8 +1,8 @@
+import { PaginationBlock } from '@features/pagination';
 import { AlbumsItem } from './albums-item';
 import { AlbumsBlockProps } from './types';
-import { Pagination } from '@features/pagination';
 
-export const AlbumsBlock = ({ albums }: AlbumsBlockProps): React.ReactElement => {
+export const AlbumsBlock = ({ albums, loading, pagination }: AlbumsBlockProps): React.ReactElement => {
   return (
     <>
       <div className="row px-3 px-sm-0">
@@ -11,7 +11,7 @@ export const AlbumsBlock = ({ albums }: AlbumsBlockProps): React.ReactElement =>
         ))}
       </div>
       <div className="d-flex justify-content-center">
-        <Pagination />
+        <PaginationBlock loading={loading} pagination={pagination} />
       </div>
     </>
   );

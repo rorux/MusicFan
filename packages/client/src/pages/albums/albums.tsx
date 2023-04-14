@@ -9,7 +9,7 @@ import { useAlbums } from './use-albums';
 export const AlbumsPage = (): React.ReactElement => {
   const { t } = useTranslation();
   const { artist } = useParams();
-  const { loading, albums } = useAlbums(artist ?? '');
+  const { loading, albums, pagination } = useAlbums(artist ?? '');
 
   const noAlbums = (
     <>
@@ -30,7 +30,13 @@ export const AlbumsPage = (): React.ReactElement => {
           </span>
           {artist}
         </h2>
-        {loading ? <Spinner /> : albums.length > 0 ? <AlbumsBlock albums={albums} /> : noAlbums}
+        {loading ? (
+          <Spinner />
+        ) : albums.length > 0 ? (
+          <AlbumsBlock albums={albums} loading={loading} pagination={pagination} />
+        ) : (
+          noAlbums
+        )}
       </div>
     </>
   );

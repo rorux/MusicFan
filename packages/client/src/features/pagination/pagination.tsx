@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { perPageItemsCount } from '@constants';
 import { Spinner } from '@components';
 import { cn, kebab } from '@bem';
+import { PaginationProps } from '@features/pagination/types';
 
 const namespace = 'pagination-block';
 const block = cn(namespace);
@@ -17,10 +18,8 @@ const getLink = (linkContent: number | JSX.Element, anchor: string | undefined):
   ) : undefined;
 };
 
-export const Pagination = () => {
+export const PaginationBlock = ({ loading, pagination }: PaginationProps) => {
   const location = useLocation();
-  const { loading, pagination } = useAppSelector((state) => state.search);
-
   const uri = location.pathname;
 
   const currentPage = pagination?.page ?? 1;

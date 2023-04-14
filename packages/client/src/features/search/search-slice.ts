@@ -2,25 +2,8 @@ import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxj
 import axios from 'axios';
 import { $axios_music } from '@http';
 import { i18n } from '@resources';
-import { api } from '@api';
 import { toCamelCase } from '@utils';
-import { Album, AlbumFullInfo, Artist, FindAlbums, MusicResponse, SearchState } from './types';
-
-export const findAlbumsByArtist = createAsyncThunk<MusicResponse<Album>, FindAlbums, { rejectValue: string }>(
-  '@@search/albums',
-  async function ({ artist, page, perPage, sort, sortOrder }, { rejectWithValue }) {
-    try {
-      const response = await $axios_music.get<MusicResponse<Album>>(
-        api.music.albums(artist, page, perPage, sort, sortOrder),
-      );
-      return toCamelCase(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.response?.data.message);
-      } else return rejectWithValue(i18n.t('error.unknown'));
-    }
-  },
-);
+import { AlbumFullInfo, SearchState } from './types';
 
 export const getAlbumFullInfo = createAsyncThunk<AlbumFullInfo, string, { rejectValue: string }>(
   '@@search/album',
@@ -54,22 +37,9 @@ const searchSlice = createSlice({
       ...state,
       album: null,
     }),
-    cleanError: (state) => ({
-      ...state,
-      error: null,
-    }),
   },
   extraReducers: (builder) => {
     builder
-      .addCase(findAlbumsByArtist.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(findAlbumsByArtist.fulfilled, (state, action) => {
-        state.albums = action.payload.results;
-        state.pagination = action.payload.pagination;
-        state.loading = false;
-      })
       .addCase(getAlbumFullInfo.pending, (state) => {
         state.albumLoading = true;
         state.error = null;
@@ -90,4 +60,4 @@ function isError(action: AnyAction) {
 }
 
 export const searchReducer = searchSlice.reducer;
-export const { cleanAlbum, cleanError } = searchSlice.actions;
+export const { cleanAlbum } = searchSlice.actions;

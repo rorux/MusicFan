@@ -1,15 +1,4 @@
-export type Pagination = {
-  page: number;
-  pages: number;
-  perPage: number;
-  items: number;
-  urls: {
-    first?: string;
-    last?: string;
-    prev?: string;
-    next?: string;
-  };
-};
+import { Pagination } from '@features/pagination';
 
 export type MusicResponse<T> = {
   pagination: Pagination;
