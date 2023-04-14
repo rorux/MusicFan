@@ -4,8 +4,10 @@ import { uniqueId } from 'lodash';
 import { cn, kebab } from '@bem';
 import { useAppDispatch, useAppSelector } from '@store';
 import { cleanAlbum, getAlbumFullInfo } from '@features/search';
+import { addFavourite } from '@features/favourites';
 import { Heart, Modal, Spinner } from '@components';
 import { AlbumsItemProps } from './types';
+import { toast } from 'react-toastify';
 
 const block = cn('albums-item');
 
@@ -24,11 +26,32 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
 
   const tracklist = albumWithTracks?.tracklist ?? [];
 
+  const getAlbum = async (url: string | null) => {
+    if (url) {
+      dispatch(getAlbumFullInfo(url));
+    } else dispatch(cleanAlbum());
+  };
+
   const onClickTitle = () => {
     setOpenAlbumModal(true);
-    if (album.master_url) {
-      dispatch(getAlbumFullInfo(album.master_url));
-    } else dispatch(cleanAlbum());
+    getAlbum(album.masterUrl);
+  };
+
+  const onClickHeart = async () => {
+    await getAlbum(album.masterUrl);
+    const { masterId, title, year, country, style, format, coverImage } = album;
+    await dispatch(
+      addFavourite({
+        albumId: masterId,
+        title,
+        year,
+        country,
+        style,
+        format,
+        coverImage,
+        tracklist: albumWithTracks?.tracklist ?? [],
+      }),
+    );
   };
 
   const header = (onClick?: () => void): JSX.Element => (
@@ -37,14 +60,14 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
         {titleWithYear}
       </div>
       <div className={kebab(block('heart-wrapper'))}>
-        <Heart onClick={() => console.log('albumId', album.id)} />
+        <Heart onClick={onClickHeart} />
       </div>
     </div>
   );
 
   const cover = (
     <div className={kebab(block('picture', ['mb-3']))}>
-      <img src={album.cover_image} alt={album.title} className="w-100" />
+      <img src={album.coverImage} alt={album.title} className="w-100" />
     </div>
   );
 

@@ -6,7 +6,7 @@ export type MusicResponse<T> = {
 export type Pagination = {
   page: number;
   pages: number;
-  per_page: number;
+  perPage: number;
   items: number;
   urls: {
     first?: string;
@@ -30,17 +30,17 @@ export type Album = {
   format: string[];
   genre: string[];
   style: string[];
-  master_id: number | null;
-  master_url: string | null;
+  masterId: number;
+  masterUrl: string | null;
   uri: string;
   title: string;
   thumb: string;
-  cover_image: string;
+  coverImage: string;
 };
 
 export type Track = {
   position: string;
-  type_: string;
+  type: string;
   title: string;
   duration?: string;
 };
@@ -59,7 +59,7 @@ export type AlbumFullInfo = {
   artists: Array<{
     name: string;
     id: number;
-    resource_url: string;
+    resourceUrl: string;
   }>;
   styles: Array<string>;
   tracklist: Array<Track>;
@@ -70,13 +70,13 @@ export type AlbumFullInfo = {
 export type Artist = {
   id: number;
   type: 'artist';
-  master_id: number | null;
-  master_url: string | null;
+  masterId: number | null;
+  masterUrl: string | null;
   uri: string;
   title: string;
   thumb: string;
-  cover_image: string;
-  resource_url: string;
+  coverImage: string;
+  resourceUrl: string;
 };
 
 export type SearchState = {

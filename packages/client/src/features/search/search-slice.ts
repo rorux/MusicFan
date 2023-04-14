@@ -1,9 +1,9 @@
-import { AnyAction, createAsyncThunk, createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState } from '@store';
 import { $axios_music } from '@http';
 import { i18n } from '@resources';
 import { api } from '@api';
+import { toCamelCase } from '@utils';
 import { Album, AlbumFullInfo, Artist, FindAlbums, MusicResponse, SearchState } from './types';
 
 export const findAlbumsByArtist = createAsyncThunk<MusicResponse<Album>, FindAlbums, { rejectValue: string }>(
@@ -13,7 +13,7 @@ export const findAlbumsByArtist = createAsyncThunk<MusicResponse<Album>, FindAlb
       const response = await $axios_music.get<MusicResponse<Album>>(
         api.music.albums(artist, page, perPage, sort, sortOrder),
       );
-      return response.data;
+      return toCamelCase(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         return rejectWithValue(error.response?.data.message);
@@ -27,7 +27,7 @@ export const getAlbumFullInfo = createAsyncThunk<AlbumFullInfo, string, { reject
   async function (url, { rejectWithValue }) {
     try {
       const response = await $axios_music.get<AlbumFullInfo>(url);
-      return response.data;
+      return toCamelCase(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         return rejectWithValue(error.response?.data.message);
@@ -41,7 +41,7 @@ export const findArtist = createAsyncThunk<MusicResponse<Artist>, string, { reje
   async function (search, { rejectWithValue }) {
     try {
       const response = await $axios_music.get<MusicResponse<Artist>>(api.music.artist(search));
-      return response.data;
+      return toCamelCase(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         return rejectWithValue(error.response?.data.message);
@@ -67,6 +67,10 @@ const searchSlice = createSlice({
     cleanAlbum: (state) => ({
       ...state,
       album: null,
+    }),
+    cleanError: (state) => ({
+      ...state,
+      error: null,
     }),
   },
   extraReducers: (builder) => {
@@ -109,16 +113,4 @@ function isError(action: AnyAction) {
 }
 
 export const searchReducer = searchSlice.reducer;
-export const { cleanAlbum } = searchSlice.actions;
-
-// const albums = (state: RootState) => state.search.albums;
-// export const selectUniqueArtistsFromAlbums = createSelector([albums], (albums): Artist[] => {
-//   const artists =
-//     albums.map(({ artistId, artistName, artistViewUrl }) => ({
-//       artistId,
-//       artistName,
-//       artistViewUrl,
-//     })) ?? [];
-//   const uniqueArtists = artists.length ? [...new Map(artists.map((artist) => [artist.artistId, artist])).values()] : [];
-//   return uniqueArtists;
-// });
+export const { cleanAlbum, cleanError } = searchSlice.actions;

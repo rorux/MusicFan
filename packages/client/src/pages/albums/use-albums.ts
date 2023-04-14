@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '@store';
-import { Album, findAlbumsByArtist } from '@features/search';
+import { Album, cleanError, findAlbumsByArtist } from '@features/search';
 
 export const useAlbums = (artist: string): { loading: boolean; albums: Album[] } => {
   const dispatch = useAppDispatch();
@@ -19,6 +19,7 @@ export const useAlbums = (artist: string): { loading: boolean; albums: Album[] }
 
   if (error) {
     toast.error(error);
+    dispatch(cleanError());
   }
 
   return { loading, albums };
