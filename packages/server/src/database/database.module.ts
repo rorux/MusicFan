@@ -6,7 +6,7 @@ import { Token } from '../tokens/token.entity';
 import { Favourite } from '../favourites/favourite.entity';
 import { CreateTableUsers1679342186052 } from '../../db/migrations/1679342186052-CreateTableUsers';
 import { CreateTableTokens1679518526354 } from '../../db/migrations/1679518526354-CreateTableTokens';
-import { CreateTableFavourites1681388357632 } from '../../db/migrations/1681388357632-CreateTableFavourites';
+import { CreateTableFavourites1681591713543 } from '../../db/migrations/1681591713543-CreateTableFavourites';
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import { CreateTableFavourites1681388357632 } from '../../db/migrations/16813883
         host: config.get<string>('POSTGRES_HOST'),
         port: Number(config.get<number>('POSTGRES_PORT')),
         entities: [User, Token, Favourite],
-        migrations: [CreateTableUsers1679342186052, CreateTableTokens1679518526354, CreateTableFavourites1681388357632],
+        migrations: [CreateTableUsers1679342186052, CreateTableTokens1679518526354, CreateTableFavourites1681591713543],
         migrationsRun: true,
         migrationsTableName: 'migrations',
         synchronize: false,

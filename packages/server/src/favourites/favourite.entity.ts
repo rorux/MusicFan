@@ -15,6 +15,13 @@ export class Favourite {
   @Column()
   albumId: number;
 
+  @ApiProperty({
+    example: "{ id: 123, name: 'Ivan', resourceUrl: 'http://site.ru/123' }",
+    description: 'Artist',
+  })
+  @Column({ type: 'json', nullable: true })
+  artist: Record<string, string | number>;
+
   @ApiProperty({ example: 'Title', description: "Album's name" })
   @Column()
   title: string;
