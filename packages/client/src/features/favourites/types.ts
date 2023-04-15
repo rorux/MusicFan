@@ -1,4 +1,4 @@
-import { Track } from '@features/search';
+import { ArtistDetails, Track } from '@features/album';
 
 export type Favourite = {
   id: number;
@@ -11,6 +11,7 @@ export type Favourite = {
   format: string[];
   coverImage: string;
   tracklist: Track[];
+  artist: ArtistDetails | null;
 };
 
 export type AddFavourite = Omit<Favourite, 'id' | 'userId'>;

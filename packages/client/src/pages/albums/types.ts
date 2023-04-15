@@ -1,4 +1,4 @@
-import { Album } from '@features/search';
+import { Album } from '@features/albums';
 import { Pagination } from '@features/pagination';
 
 export type AlbumsBlockProps = {

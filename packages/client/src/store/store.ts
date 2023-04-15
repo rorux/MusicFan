@@ -3,7 +3,7 @@ import { authReducer } from '@features/auth';
 import { themeReducer } from '@features/theme';
 import { artistsReducer } from '@features/artists';
 import { albumsReducer } from '@features/albums';
-import { searchReducer } from '@features/search';
+import { albumReducer } from '@features/album';
 import { favouritesReducer } from '@features/favourites';
 
 export const store = configureStore({
@@ -12,7 +12,7 @@ export const store = configureStore({
     theme: themeReducer,
     artists: artistsReducer,
     albums: albumsReducer,
-    search: searchReducer,
+    album: albumReducer,
     favourites: favouritesReducer,
   },
   devTools: true,

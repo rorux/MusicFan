@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { uniqueId } from 'lodash';
 import { cn, kebab } from '@bem';
 import { useAppDispatch, useAppSelector } from '@store';
-import { cleanAlbum, getAlbumFullInfo } from '@features/search';
+import { getAlbumDetails, cleanAlbum, ArtistDetails } from '@features/album';
 import { addFavourite } from '@features/favourites';
 import { Heart, Modal, Spinner } from '@components';
 import { AlbumsItemProps } from './types';
-import { toast } from 'react-toastify';
 
 const block = cn('albums-item');
 
@@ -15,7 +15,7 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
   const [isOpenAlbumModal, setOpenAlbumModal] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const { albumLoading, album: albumWithTracks } = useAppSelector((state) => state.search);
+  const { loading, data: albumDetails, error } = useAppSelector((state) => state.album);
 
   const year = album.year ? ` (${album.year})` : '';
   const titleWithYear = `${album.title}${year}`;
@@ -24,11 +24,11 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
   const styles = album.style.length > 0 ? album.style.join(', ') : t('not-specified');
   const formats = album.format.length > 0 ? album.format.join(', ') : t('not-specified');
 
-  const tracklist = albumWithTracks?.tracklist ?? [];
+  const tracklist = albumDetails?.tracklist ?? [];
 
   const getAlbum = async (url: string | null) => {
     if (url) {
-      dispatch(getAlbumFullInfo(url));
+      dispatch(getAlbumDetails(url));
     } else dispatch(cleanAlbum());
   };
 
@@ -40,16 +40,18 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
   const onClickHeart = async () => {
     await getAlbum(album.masterUrl);
     const { masterId, title, year, country, style, format, coverImage } = album;
+    const artist = albumDetails?.artists[0] ?? null;
     await dispatch(
       addFavourite({
         albumId: masterId,
+        artist: artist ? { id: artist.id, name: artist.name, resourceUrl: artist.resourceUrl } : null,
         title,
         year,
         country,
         style,
         format,
         coverImage,
-        tracklist: albumWithTracks?.tracklist ?? [],
+        tracklist: albumDetails?.tracklist ?? [],
       }),
     );
   };
@@ -107,6 +109,10 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
       <p className="text-center">{t('albums-page.tracklist-empty')}</p>
     );
 
+  if (error) {
+    toast.error(error);
+  }
+
   return (
     <div className="col-12 col-sm-6 col-md-4 col-xl-3 px-2 pb-3">
       <div className={kebab(block(undefined, ['card px-4 py-3 h-100 rounded-0']))}>
@@ -114,8 +120,8 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
         {cover}
         {details}
       </div>
-      <Modal isOpen={isOpenAlbumModal} setOpen={setOpenAlbumModal} title={albumLoading ? <Spinner /> : header()}>
-        {albumLoading ? (
+      <Modal isOpen={isOpenAlbumModal} setOpen={setOpenAlbumModal} title={loading ? <Spinner /> : header()}>
+        {loading ? (
           <Spinner />
         ) : (
           <>
