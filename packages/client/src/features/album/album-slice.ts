@@ -33,6 +33,10 @@ const albumSlice = createSlice({
       ...state,
       data: null,
     }),
+    cleanAlbumError: (state) => ({
+      ...state,
+      error: null,
+    }),
   },
   extraReducers: (builder) => {
     builder
@@ -52,4 +56,4 @@ const albumSlice = createSlice({
 });
 
 export const albumReducer = albumSlice.reducer;
-export const { cleanAlbum } = albumSlice.actions;
+export const { cleanAlbum, cleanAlbumError } = albumSlice.actions;

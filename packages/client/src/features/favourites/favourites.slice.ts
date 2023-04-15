@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, AnyAction, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import $axios from '@http';
 import { i18n } from '@resources';
@@ -28,7 +28,12 @@ const initialState: FavouritesState = {
 const favouritesSlice = createSlice({
   name: '@@favourites',
   initialState,
-  reducers: {},
+  reducers: {
+    cleanFavouritesError: (state) => ({
+      ...state,
+      error: null,
+    }),
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addFavourite.pending, (state) => {
@@ -39,7 +44,7 @@ const favouritesSlice = createSlice({
         state.favourites = [...state.favourites, action.payload];
         state.loading = false;
       })
-      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+      .addCase(addFavourite.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       });
@@ -47,7 +52,4 @@ const favouritesSlice = createSlice({
 });
 
 export const favouritesReducer = favouritesSlice.reducer;
-
-function isError(action: AnyAction) {
-  return action.type.endsWith('rejected');
-}
+export const { cleanFavouritesError } = favouritesSlice.actions;

@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { uniqueId } from 'lodash';
 import { cn, kebab } from '@bem';
 import { useAppDispatch, useAppSelector } from '@store';
-import { getAlbumDetails, cleanAlbum, ArtistDetails } from '@features/album';
-import { addFavourite } from '@features/favourites';
+import { getAlbumDetails, cleanAlbum, cleanAlbumError } from '@features/album';
+import { addFavourite, cleanFavouritesError } from '@features/favourites';
 import { Heart, Modal, Spinner } from '@components';
 import { AlbumsItemProps } from './types';
 
@@ -15,7 +15,8 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
   const [isOpenAlbumModal, setOpenAlbumModal] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const { loading, data: albumDetails, error } = useAppSelector((state) => state.album);
+  const { loading, data: albumDetails, error: albumError } = useAppSelector((state) => state.album);
+  const { error: favouriteError } = useAppSelector((state) => state.favourites);
 
   const year = album.year ? ` (${album.year})` : '';
   const titleWithYear = `${album.title}${year}`;
@@ -109,8 +110,14 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
       <p className="text-center">{t('albums-page.tracklist-empty')}</p>
     );
 
-  if (error) {
-    toast.error(error);
+  if (albumError) {
+    toast.error(albumError);
+    dispatch(cleanAlbumError());
+  }
+
+  if (favouriteError) {
+    toast.error(favouriteError);
+    dispatch(cleanFavouritesError());
   }
 
   return (
