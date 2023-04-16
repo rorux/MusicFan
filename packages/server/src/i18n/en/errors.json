@@ -2,5 +2,6 @@
   "user-already-exists": "The user with the login {login} already exists!",
   "album-already-favourite": "The album has already been added to favorites!",
   "invalid-data": "Invalid login and/or password!",
-  "unauthorized": "The user is not logged in!"
+  "unauthorized": "The user is not logged in!",
+  "not-found": "The object was not found!"
 }

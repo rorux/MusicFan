@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Post, HttpCode, UseGuards, BadRequestException, Headers } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  HttpCode,
+  UseGuards,
+  BadRequestException,
+  Headers,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { I18n, I18nContext } from 'nestjs-i18n';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
@@ -43,5 +54,19 @@ export class FavouritesController {
 
     const newFavourite = await this.favouritesService.addFavourite({ ...favouriteDto, userId: publicUser.id });
     return newFavourite;
+  }
+
+  @ApiOperation({ summary: 'Remove favourite album' })
+  @ApiResponse({ status: 200, type: Favourite })
+  @UseGuards(AuthGuard)
+  @HttpCode(200)
+  @Delete(':albumId')
+  async remove(
+    @Param('albumId') albumId: string,
+    @I18n() i18n: I18nContext,
+    @Headers('Authorization') authHeader: string,
+  ): Promise<void> {
+    const publicUser = this.tokensService.decodeAuthHeader(authHeader, i18n);
+    await this.favouritesService.removeFavourite(publicUser.id, Number(albumId), i18n);
   }
 }

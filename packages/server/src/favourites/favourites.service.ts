@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Favourite } from './favourite.entity';
 import { AddFavouriteDto } from './dto/add-favourite.dto';
+import { I18nContext } from 'nestjs-i18n';
 
 @Injectable()
 export class FavouritesService {
@@ -14,10 +15,10 @@ export class FavouritesService {
     return newFavourite;
   }
 
-  async removeFavourite(id: number): Promise<void> {
-    const deletedFavourite = await this.favouritesRepository.delete(id);
+  async removeFavourite(userId: number, albumId: number, i18n: I18nContext): Promise<void> {
+    const deletedFavourite = await this.favouritesRepository.delete({ userId, albumId });
     if (!deletedFavourite.affected) {
-      throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
+      throw new HttpException(i18n.t('errors.not-found'), HttpStatus.NOT_FOUND);
     }
   }
 
