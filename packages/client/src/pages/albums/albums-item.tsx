@@ -27,34 +27,15 @@ export const AlbumsItem = ({ album }: AlbumsItemProps): React.ReactElement => {
 
   const tracklist = albumDetails?.tracklist ?? [];
 
-  const getAlbum = async (url: string | null) => {
-    if (url) {
-      dispatch(getAlbumDetails(url));
+  const onClickTitle = () => {
+    setOpenAlbumModal(true);
+    if (album.masterUrl) {
+      dispatch(getAlbumDetails(album.masterUrl));
     } else dispatch(cleanAlbum());
   };
 
-  const onClickTitle = () => {
-    setOpenAlbumModal(true);
-    getAlbum(album.masterUrl);
-  };
-
-  const onClickHeart = async () => {
-    await getAlbum(album.masterUrl);
-    const { masterId, title, year, country, style, format, coverImage } = album;
-    const artist = albumDetails?.artists[0] ?? null;
-    await dispatch(
-      addFavourite({
-        albumId: masterId,
-        artist: artist ? { id: artist.id, name: artist.name, resourceUrl: artist.resourceUrl } : null,
-        title,
-        year,
-        country,
-        style,
-        format,
-        coverImage,
-        tracklist: albumDetails?.tracklist ?? [],
-      }),
-    );
+  const onClickHeart = () => {
+    dispatch(addFavourite(album));
   };
 
   const header = (onClick?: () => void): JSX.Element => (

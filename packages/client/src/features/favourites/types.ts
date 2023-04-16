@@ -14,8 +14,6 @@ export type Favourite = {
   artist: ArtistDetails | null;
 };
 
-export type AddFavourite = Omit<Favourite, 'id' | 'userId'>;
-
 export type FavouritesState = {
   favourites: Favourite[];
   loading: boolean;

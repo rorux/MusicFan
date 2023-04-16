@@ -1,14 +1,39 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import $axios from '@http';
+import $axios, { $axios_music } from '@http';
 import { i18n } from '@resources';
 import { api } from '@api';
-import { AddFavourite, Favourite, FavouritesState } from './types';
+import { Album } from '@features/albums';
+import { AlbumDetails } from '@features/album';
+import { Favourite, FavouritesState } from './types';
 
-export const addFavourite = createAsyncThunk<Favourite, AddFavourite, { rejectValue: string }>(
+export const addFavourite = createAsyncThunk<Favourite, Album, { rejectValue: string }>(
   '@@favourites/add',
-  async function (newFavourite, { rejectWithValue }) {
+  async function (album, { rejectWithValue }) {
     try {
+      const { masterId, title, year, country, style, format, coverImage } = album;
+      const albumDetailsResponse = album.masterUrl ? await $axios_music.get<AlbumDetails>(album.masterUrl) : null;
+      const artist = albumDetailsResponse?.data.artists[0] ?? null;
+      const tracklistRawData = albumDetailsResponse?.data.tracklist ?? [];
+      const tracklist = tracklistRawData.map((track) => ({
+        position: track.position,
+        type: track.type,
+        title: track.title,
+        duration: track.duration ?? null,
+      }));
+
+      const newFavourite = {
+        albumId: masterId,
+        artist: artist ? { id: artist.id, name: artist.name, resourceUrl: artist.resourceUrl } : null,
+        title,
+        year,
+        country,
+        style,
+        format,
+        coverImage,
+        tracklist,
+      };
+
       const response = await $axios.post<Favourite>(api.favourites.add, newFavourite);
       return response.data;
     } catch (error) {
