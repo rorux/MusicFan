@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector, PayloadAction, AnyAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import $axios, { $axios_music } from '@http';
 import { i18n } from '@resources';
@@ -59,6 +59,20 @@ export const addFavourite = createAsyncThunk<Favourite, Album, { rejectValue: st
   },
 );
 
+export const removeFavourite = createAsyncThunk<number, number, { rejectValue: string }>(
+  '@@favourites/remove',
+  async function (albumId, { rejectWithValue }) {
+    try {
+      const response = await $axios.delete<number>(`${api.favourites.remove}/${albumId}`);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data.message);
+      } else return rejectWithValue(i18n.t('error.unknown'));
+    }
+  },
+);
+
 const initialState: FavouritesState = {
   data: [],
   loading: false,
@@ -69,14 +83,12 @@ const favouritesSlice = createSlice({
   name: '@@favourites',
   initialState,
   reducers: {
-    cleanFavouritesError: (state) => ({
-      ...state,
-      error: null,
-    }),
-    cleanFavourites: (state) => ({
-      ...state,
-      data: [],
-    }),
+    cleanFavouritesError: (state) => {
+      state.error = null;
+    },
+    cleanFavourites: (state) => {
+      state.data = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,24 +100,32 @@ const favouritesSlice = createSlice({
         state.data = action.payload ?? [];
         state.loading = false;
       })
-      .addCase(fetchFavourites.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      })
       .addCase(addFavourite.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(addFavourite.fulfilled, (state, action) => {
-        state.data = [...state.data, action.payload];
+        state.data.push(action.payload);
         state.loading = false;
       })
-      .addCase(addFavourite.rejected, (state, action) => {
+      .addCase(removeFavourite.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(removeFavourite.fulfilled, (state, action) => {
+        state.data = state.data.filter((favourite) => favourite.albumId !== action.payload);
+        state.loading = false;
+      })
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
         state.loading = false;
       });
   },
 });
+
+function isError(action: AnyAction) {
+  return action.type.endsWith('rejected');
+}
 
 export const favouritesReducer = favouritesSlice.reducer;
 export const { cleanFavouritesError, cleanFavourites } = favouritesSlice.actions;

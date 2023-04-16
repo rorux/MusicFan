@@ -65,8 +65,9 @@ export class FavouritesController {
     @Param('albumId') albumId: string,
     @I18n() i18n: I18nContext,
     @Headers('Authorization') authHeader: string,
-  ): Promise<void> {
+  ): Promise<number> {
     const publicUser = this.tokensService.decodeAuthHeader(authHeader, i18n);
-    await this.favouritesService.removeFavourite(publicUser.id, Number(albumId), i18n);
+    const removedAlbumId = await this.favouritesService.removeFavourite(publicUser.id, Number(albumId), i18n);
+    return removedAlbumId;
   }
 }

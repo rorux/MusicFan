@@ -3,7 +3,12 @@ import { kebab } from '@bem';
 import { ClassNameFormatter } from '@bem-react/classname';
 import { useAppDispatch, useAppSelector } from '@store';
 import { Album } from '@features/albums';
-import { addFavourite, cleanFavouritesError, selectFavouritesAlbumIdsList } from '@features/favourites';
+import {
+  addFavourite,
+  cleanFavouritesError,
+  removeFavourite,
+  selectFavouritesAlbumIdsList,
+} from '@features/favourites';
 import { Heart } from '@components';
 
 export const useHeader = (album: Album, block: ClassNameFormatter): ((onClick?: () => void) => JSX.Element) => {
@@ -15,7 +20,8 @@ export const useHeader = (album: Album, block: ClassNameFormatter): ((onClick?: 
   const titleWithYear = `${album.title}${year}`;
 
   const onClickHeart = () => {
-    dispatch(addFavourite(album));
+    if (isFavourite) dispatch(removeFavourite(album.id));
+    else dispatch(addFavourite(album));
   };
 
   if (error) {

@@ -15,11 +15,12 @@ export class FavouritesService {
     return newFavourite;
   }
 
-  async removeFavourite(userId: number, albumId: number, i18n: I18nContext): Promise<void> {
+  async removeFavourite(userId: number, albumId: number, i18n: I18nContext): Promise<number> {
     const deletedFavourite = await this.favouritesRepository.delete({ userId, albumId });
     if (!deletedFavourite.affected) {
       throw new HttpException(i18n.t('errors.not-found'), HttpStatus.NOT_FOUND);
     }
+    return albumId;
   }
 
   async getFavouriteByUserIdAndAlbumId(userId: number, albumId: number): Promise<Favourite> {

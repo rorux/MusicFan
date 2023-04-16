@@ -29,14 +29,12 @@ const albumSlice = createSlice({
   name: '@@album',
   initialState,
   reducers: {
-    cleanAlbum: (state) => ({
-      ...state,
-      data: null,
-    }),
-    cleanAlbumError: (state) => ({
-      ...state,
-      error: null,
-    }),
+    cleanAlbum: (state) => {
+      state.data = null;
+    },
+    cleanAlbumError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
