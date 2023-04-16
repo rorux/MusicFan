@@ -1,7 +1,13 @@
 @include block('heart') {
-  fill: var(--colors-logo-yellow) !important;
+  @include el('icon') {
+    fill: var(--colors-scrollbar-thumb) !important;
 
-  &:hover {
-    fill: #f8cf54 !important;
+    &:hover {
+      fill: #f8cf54 !important;
+    }
+
+    @include mod('active') {
+      fill: var(--colors-logo-yellow) !important;
+    }
   }
 }

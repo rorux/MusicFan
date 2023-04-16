@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 import axios from 'axios';
 import $axios, { $axios_music } from '@http';
 import { i18n } from '@resources';
 import { api } from '@api';
+import { RootState } from '@store';
 import { Album } from '@features/albums';
 import { AlbumDetails } from '@features/album';
 import { Favourite, FavouritesState } from './types';
@@ -25,7 +26,7 @@ export const addFavourite = createAsyncThunk<Favourite, Album, { rejectValue: st
   '@@favourites/add',
   async function (album, { rejectWithValue }) {
     try {
-      const { masterId, title, year, country, style, format, coverImage } = album;
+      const { id, title, year, country, style, format, coverImage } = album;
       const albumDetailsResponse = album.masterUrl ? await $axios_music.get<AlbumDetails>(album.masterUrl) : null;
       const artist = albumDetailsResponse?.data.artists[0] ?? null;
       const tracklistRawData = albumDetailsResponse?.data.tracklist ?? [];
@@ -37,7 +38,7 @@ export const addFavourite = createAsyncThunk<Favourite, Album, { rejectValue: st
       }));
 
       const newFavourite = {
-        albumId: masterId,
+        albumId: id,
         artist: artist ? { id: artist.id, name: artist.name, resourceUrl: artist.resourceUrl } : null,
         title,
         year,
@@ -108,3 +109,8 @@ const favouritesSlice = createSlice({
 
 export const favouritesReducer = favouritesSlice.reducer;
 export const { cleanFavouritesError, cleanFavourites } = favouritesSlice.actions;
+
+const favourites = (state: RootState) => state.favourites.data;
+export const selectFavouritesAlbumIdsList = createSelector([favourites], (favourites): number[] =>
+  favourites.map((favourite) => favourite.albumId),
+);

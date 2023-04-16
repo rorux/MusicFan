@@ -5,5 +5,10 @@ import { HeartProps } from './types';
 const block = cn('heart');
 
 export const Heart = (props: HeartProps): React.ReactElement => {
-  return <BsFillHeartFill className={kebab(block(undefined, [props.className]))} onClick={props.onClick} />;
+  return (
+    <BsFillHeartFill
+      className={kebab(block('icon', { active: props.isActive ?? false }, [props.className]))}
+      onClick={props.onClick}
+    />
+  );
 };

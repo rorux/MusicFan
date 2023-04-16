@@ -6,7 +6,3 @@ export type AlbumsBlockProps = {
   loading: boolean;
   pagination: Pagination | null;
 };
-
-export type AlbumsItemProps = {
-  album: Album;
-};
