@@ -15,7 +15,7 @@ export type Favourite = {
 };
 
 export type FavouritesState = {
-  favourites: Favourite[];
+  data: Favourite[];
   loading: boolean;
   error: string | null | undefined;
 };

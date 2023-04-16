@@ -4,11 +4,12 @@ import { IconContext } from 'react-icons';
 import { iconsStyles } from '@context';
 import { Router } from '@router';
 import { Spinner } from '@components';
-import { useAppLoading, useAppTheme, useCheckAuth } from '@hooks';
+import { useAppLoading, useAppTheme, useCheckAuth, useFavourites } from '@hooks';
 
 function App() {
   const appLoading = useAppLoading();
-  useCheckAuth();
+  const { isAuth } = useCheckAuth();
+  useFavourites(isAuth);
   useAppTheme();
 
   return (
