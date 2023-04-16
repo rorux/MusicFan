@@ -1,4 +1,4 @@
-import { Body, Controller, Post, HttpCode, UseGuards, BadRequestException, Headers } from '@nestjs/common';
+import { Body, Controller, Get, Post, HttpCode, UseGuards, BadRequestException, Headers } from '@nestjs/common';
 import { I18n, I18nContext } from 'nestjs-i18n';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../auth/auth.guard';
@@ -11,6 +11,18 @@ import { Favourite } from './favourite.entity';
 @Controller('favourites')
 export class FavouritesController {
   constructor(private favouritesService: FavouritesService, private tokensService: TokensService) {}
+
+  @ApiOperation({ summary: 'Fetch favourite albums' })
+  @ApiResponse({ status: 200, type: Favourite })
+  @UseGuards(AuthGuard)
+  @HttpCode(200)
+  @Get()
+  async fetch(@I18n() i18n: I18nContext, @Headers('Authorization') authHeader: string): Promise<Favourite[]> {
+    const publicUser = this.tokensService.decodeAuthHeader(authHeader, i18n);
+    const favourites = await this.favouritesService.getFavouritesByUserId(publicUser.id);
+
+    return favourites;
+  }
 
   @ApiOperation({ summary: 'Add favourite album' })
   @ApiResponse({ status: 201, type: Favourite })
