@@ -1,11 +1,12 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn, kebab } from '@bem';
+import { ROUTES } from '@router';
 import { useAppSelector } from '@store';
 import { ThemeSwitcher } from '@features/theme';
 import { LangSwitcher } from '@features/lang';
 import { LogoutBtn } from '@features/logout';
 import { LoginBtn } from '@features/login';
-import { ROUTES } from '@router';
+import { Heart } from '@components';
 import { Logo } from './logo';
 
 const block = cn('header-block');
@@ -18,10 +19,16 @@ export const Header = (): React.ReactElement => {
   return (
     <div className={kebab(block(undefined, ['position-fixed w-100']))}>
       <ul className={kebab(block('list', ['nav container pe-0']))}>
-        <li className={kebab(block('item', ['nav-item']))}>
+        <li className={kebab(block('item', ['nav-item flex-grow-1']))}>
           <Logo />
         </li>
-        <li className="flex-grow-1"></li>
+        {isAuth && (
+          <li className={kebab(block('item', ['nav-item']))}>
+            <Link to={ROUTES.FAVOURITES} className={kebab(block('favourites'))}>
+              <Heart />
+            </Link>
+          </li>
+        )}
         <li className={kebab(block('item', ['nav-item']))}>
           <ThemeSwitcher />
         </li>

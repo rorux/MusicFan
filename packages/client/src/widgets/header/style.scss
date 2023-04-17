@@ -16,4 +16,12 @@
       align-items: center;
     }
   }
+
+  @include el('favourites') {
+    svg {
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+    }
+  }
 }
