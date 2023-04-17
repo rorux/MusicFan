@@ -15,6 +15,7 @@ export const Header = (): React.ReactElement => {
   const { isAuth } = useAppSelector((state) => state.auth);
   const location = useLocation();
   const isAuthPage = location.pathname === ROUTES.SIGNUP || location.pathname === ROUTES.SIGNIN;
+  const isFavouritesPage = location.pathname === ROUTES.FAVOURITES;
 
   return (
     <div className={kebab(block(undefined, ['position-fixed w-100']))}>
@@ -22,7 +23,7 @@ export const Header = (): React.ReactElement => {
         <li className={kebab(block('item', ['nav-item flex-grow-1']))}>
           <Logo />
         </li>
-        {isAuth && (
+        {isAuth && !isFavouritesPage && (
           <li className={kebab(block('item', ['nav-item']))}>
             <Link to={ROUTES.FAVOURITES} className={kebab(block('favourites'))}>
               <Heart />

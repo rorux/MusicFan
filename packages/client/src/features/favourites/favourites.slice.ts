@@ -6,7 +6,7 @@ import { api } from '@api';
 import { RootState } from '@store';
 import { Album } from '@features/albums';
 import { AlbumDetails } from '@features/album';
-import { Favourite, FavouritesState } from './types';
+import { Favourite, FavouritesState, SortedFavourites } from './types';
 
 export const fetchFavourites = createAsyncThunk<Favourite[], undefined, { rejectValue: string }>(
   '@@favourites/fetch',
@@ -131,6 +131,22 @@ export const favouritesReducer = favouritesSlice.reducer;
 export const { cleanFavouritesError, cleanFavourites } = favouritesSlice.actions;
 
 const favourites = (state: RootState) => state.favourites.data;
+
 export const selectFavouritesAlbumIdsList = createSelector([favourites], (favourites): number[] =>
   favourites.map((favourite) => favourite.albumId),
+);
+
+export const selectSortedFavourites = createSelector(
+  [favourites],
+  (favourites): SortedFavourites =>
+    favourites.reduce((acc, item) => {
+      const artistId = item.artist?.id ?? -1;
+      const artist = item.artist?.name ?? null;
+
+      if (!acc[artistId]) {
+        return { ...acc, [artistId]: { artist, data: [item] } };
+      }
+
+      return { ...acc, [artistId]: { ...acc[artistId], data: [...acc[artistId].data, item] } };
+    }, {} as SortedFavourites),
 );

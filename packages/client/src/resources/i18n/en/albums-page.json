@@ -2,7 +2,7 @@
   "country": "Country",
   "style": "Style",
   "format": "Format",
-  "no-albums": "No albums found...",
+  "empty-list": "No albums found...",
   "back-to-search": "Back to search",
   "tracklist-empty": "Tracks information is missing...",
   "tracklist-label": "Tracklist:"

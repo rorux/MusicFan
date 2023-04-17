@@ -13,7 +13,7 @@ export const AlbumsPage = (): React.ReactElement => {
 
   const noAlbums = (
     <>
-      <p className="text-center">{t('albums-page.no-albums')}</p>
+      <p className="text-center">{t('albums-page.empty-list')}</p>
       <p className="text-center">
         <Link to={ROUTES.MAIN}>{t('albums-page.back-to-search')}</Link>
       </p>

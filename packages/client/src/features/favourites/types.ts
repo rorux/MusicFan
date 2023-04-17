@@ -19,3 +19,10 @@ export type FavouritesState = {
   loading: boolean;
   error: string | null | undefined;
 };
+
+export type SortedFavourites = {
+  [key: number]: {
+    artist: string | null;
+    data: Favourite[];
+  };
+};
