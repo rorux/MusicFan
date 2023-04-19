@@ -1,0 +1,10 @@
+@include block('details') {
+  @include el('item') {
+    color: var(--colors-text-additional);
+  }
+
+  @include el('label') {
+    color: var(--colors-text-secondary);
+    font-weight: 600;
+  }
+}

@@ -20,9 +20,11 @@ export type FavouritesState = {
   error: string | null | undefined;
 };
 
+export type FavouritesByArtists = {
+  artist: string | null;
+  data: Favourite[];
+};
+
 export type SortedFavourites = {
-  [key: number]: {
-    artist: string | null;
-    data: Favourite[];
-  };
+  [key: number]: FavouritesByArtists;
 };

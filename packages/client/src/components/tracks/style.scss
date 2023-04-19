@@ -1,0 +1,8 @@
+@include block('tracklist') {
+  color: var(--colors-text-secondary);
+
+  @include el('label') {
+    color: var(--colors-text-secondary);
+    font-weight: 600;
+  }
+}

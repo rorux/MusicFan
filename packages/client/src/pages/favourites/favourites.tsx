@@ -4,6 +4,7 @@ import { ROUTES } from '@router';
 import { useAppSelector } from '@store';
 import { Header } from '@widgets/header';
 import { Spinner } from '@components';
+import { FavouritesBlock } from './favourites-block';
 import { useFavouritesList } from './use-favourites-list';
 
 export const FavouritesPage = (): React.ReactElement => {
@@ -30,7 +31,7 @@ export const FavouritesPage = (): React.ReactElement => {
       <Header />
       <div className="container content-wrapper">
         <h2 className="text-center px-5 mt-2 mt-md-5 mb-3 mb-md-5">{t('favourites-page.title')}</h2>
-        {loading ? <Spinner /> : hasFavourites ? <div>Favourites</div> : noFavourites}
+        {loading ? <Spinner /> : hasFavourites ? <FavouritesBlock favourites={sortedFavourites} /> : noFavourites}
       </div>
     </>
   );

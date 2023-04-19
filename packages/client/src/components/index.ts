@@ -5,3 +5,7 @@ export * from './heart';
 export * from './input';
 export * from './modal';
 export * from './spinner';
+export * from './tracks';
+export * from './album-header';
+export * from './album-details';
+export * from './cover-image';

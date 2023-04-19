@@ -35,7 +35,7 @@ export const Artists = (): React.ReactElement => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    return navigate(`${ROUTES.ALBUMS}/${search}`);
+    if (search) return navigate(`${ROUTES.ALBUMS}/${search}`);
   };
 
   useEffect(() => {

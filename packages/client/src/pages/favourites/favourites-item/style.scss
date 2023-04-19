@@ -1,0 +1,13 @@
+@include block('favourites-item') {
+  background-color: var(--colors-block-bg);
+  cursor: default;
+
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+
+  @include el('title') {
+    color: var(--colors-text-secondary);
+    font-weight: 600;
+  }
+}

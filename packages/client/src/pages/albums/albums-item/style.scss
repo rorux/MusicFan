@@ -6,42 +6,7 @@
     box-shadow: var(--shadow);
   }
 
-  @include el('title') {
-    color: var(--colors-text-secondary);
-    font-weight: 600;
-
-    @include mod('link') {
-      cursor: pointer;
-
-      &:hover {
-        color: var(--colors-text-basic);
-      }
-    }
-  }
-
-  @include el('detail') {
-    color: var(--colors-text-additional);
-  }
-
-  @include el('detail-label') {
-    color: var(--colors-text-secondary);
-    font-weight: 600;
-  }
-
-  @include el('heart-wrapper') {
-    svg {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-  }
-
   @include el('spinner') {
     align-items: start !important;
-  }
-
-  @include el('tracklist-label') {
-    color: var(--colors-text-secondary);
-    font-weight: 600;
   }
 }

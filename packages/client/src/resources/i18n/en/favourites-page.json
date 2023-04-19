@@ -1,5 +1,6 @@
 {
   "title": "Favourites",
   "empty-list": "The favorites list is empty...",
-  "back-to-search": "Back to search"
+  "back-to-search": "Back to search",
+  "artist-not-specified": "The artist is not specified"
 }
