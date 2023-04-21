@@ -1,0 +1,9 @@
+@include block('trash') {
+  @include el('icon') {
+    fill: var(--colors-text-additional) !important;
+
+    &:hover {
+      fill: var(--colors-text-secondary) !important;
+    }
+  }
+}
