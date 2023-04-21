@@ -4,7 +4,7 @@ export const Button = (props: ButtonProps): React.ReactElement => {
   const className = `btn btn-outline-green w-100 h-100 rounded-0 text-uppercase d-flex justify-content-center align-items-center ${props.className}`;
 
   return (
-    <button type="submit" className={className}>
+    <button type="submit" className={className} onClick={props.onClick}>
       {props.loading && (
         <span
           className="spinner-grow me-1"

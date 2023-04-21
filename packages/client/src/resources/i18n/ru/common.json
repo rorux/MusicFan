@@ -5,5 +5,7 @@
   "login": "Войти",
   "logout": "Выйти",
   "find": "Найти",
-  "not-specified": "Не указано"
+  "not-specified": "Не указано",
+  "yes": "Да",
+  "no": "Нет"
 }

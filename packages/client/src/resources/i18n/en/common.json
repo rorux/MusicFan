@@ -5,5 +5,7 @@
   "login": "Login",
   "logout": "Logout",
   "find": "Find",
-  "not-specified": "Not specified"
+  "not-specified": "Not specified",
+  "yes": "Yes",
+  "no": "No"
 }

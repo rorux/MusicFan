@@ -2,5 +2,6 @@
   "title": "Избранное",
   "empty-list": "Список избранного пуст...",
   "back-to-search": "Назад к поиску",
-  "artist-not-specified": "Артист не указан"
+  "artist-not-specified": "Артист не указан",
+  "remove": "Удалить альбом из избранного?"
 }

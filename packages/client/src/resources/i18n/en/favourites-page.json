@@ -2,5 +2,6 @@
   "title": "Favourites",
   "empty-list": "The favorites list is empty...",
   "back-to-search": "Back to search",
-  "artist-not-specified": "The artist is not specified"
+  "artist-not-specified": "The artist is not specified",
+  "remove": "Delete an album from favorites?"
 }
