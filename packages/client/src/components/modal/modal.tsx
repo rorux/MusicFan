@@ -25,9 +25,7 @@ export const Modal = (props: ModalWindowProps) => {
               <span className="modal-title h5">{props.title}</span>
               <button
                 type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
+                className={kebab(block('close', ['btn-close']))}
                 onClick={() => props.setOpen(false)}
               ></button>
             </div>

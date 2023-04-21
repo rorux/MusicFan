@@ -10,3 +10,4 @@ export * from './tracks';
 export * from './album-header';
 export * from './album-details';
 export * from './cover-image';
+export * from './accordion';

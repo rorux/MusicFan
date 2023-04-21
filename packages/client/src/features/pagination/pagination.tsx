@@ -1,4 +1,3 @@
-import { useAppSelector } from '@store';
 import { Link, useLocation } from 'react-router-dom';
 import { perPageItemsCount } from '@constants';
 import { Spinner } from '@components';

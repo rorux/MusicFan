@@ -17,7 +17,7 @@ export const FavouritesItemAlbums = ({ album }: FavouritesItemAlbumsProps): Reac
   const details = useDetails(album);
 
   return (
-    <div className="col-12 col-xl-6 px-2 pb-3">
+    <div className="col-12 col-xl-6 px-3 pb-3">
       <div className={kebab(block(undefined, ['card px-4 py-3 h-100 rounded-0']))}>
         <div className="h5 mb-4">
           <AlbumHeader

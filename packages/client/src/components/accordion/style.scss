@@ -1,0 +1,27 @@
+@include block('accordion-item') {
+  background-color: var(--colors-bg);
+  border: 1px solid var(--colors-divider);
+
+  @include el('header') {
+    background-color: var(--colors-bg);
+    color: var(--colors-text-secondary);
+
+    &::after {
+      filter: brightness(300%);
+    }
+
+    @include mod('opened') {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  @include el('body') {
+    display: none;
+
+    @include mod('shown') {
+      display: block;
+    }
+  }
+}
