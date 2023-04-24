@@ -7,11 +7,13 @@ import {
   removeFavourite,
   selectFavouritesAlbumIdsList,
 } from '@features/favourites';
+import { cleanAuthState } from '@features/auth';
 import { Heart, AlbumHeader } from '@components';
 
 export const useHeader = (album: Album): ((onClick?: () => void) => React.ReactElement) => {
   const dispatch = useAppDispatch();
-  const { error } = useAppSelector((state) => state.favourites);
+  const { error: favouritesError } = useAppSelector((state) => state.favourites);
+  const { error: authError } = useAppSelector((state) => state.auth);
   const favouritesAlbumIdsList: number[] = useAppSelector(selectFavouritesAlbumIdsList);
   const isFavourite = favouritesAlbumIdsList.includes(album.id);
 
@@ -20,9 +22,13 @@ export const useHeader = (album: Album): ((onClick?: () => void) => React.ReactE
     else dispatch(addFavourite(album));
   };
 
-  if (error) {
-    toast.error(error);
+  if (favouritesError) {
+    toast.error(favouritesError);
     dispatch(cleanFavouritesError());
+  }
+
+  if (authError) {
+    dispatch(cleanAuthState());
   }
 
   return (onClick?: () => void) => (
