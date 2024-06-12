@@ -1,4 +1,4 @@
-FROM node:16.14.2-alpine AS builder
+FROM node:18.20.3-alpine AS builder
 WORKDIR /usr/src/app
 COPY . .
 RUN yarn
